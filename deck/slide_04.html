@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — Всё в одном кармане</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- ambient orbs -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:540px;height:540px;right:-220px;top:-260px;opacity:.26"></div>
+  <div class="orb orb-gold" data-decor aria-hidden="true" style="width:480px;height:480px;left:-200px;bottom:-240px;opacity:.22"></div>
+
+  <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;padding:56px 60px">
+
+    <!-- header -->
+    <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+      <h1 style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;margin:0;color:var(--primary)">
+        Всё в одном <span class="grad-text">кармане</span>
+      </h1>
+      <p class="muted" style="font-size:var(--fs-h3);line-height:1.35;margin:0 0 6px;font-weight:500;text-align:right">
+        Шесть инструментов, которые работают как один
+      </p>
+    </header>
+
+    <!-- bento 3x2 -->
+    <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:22px;margin-top:28px;min-height:0">
+
+      <div class="card" style="padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">🎯</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">Тудушка-очередь</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Одна задача наверху, остальные ждут; порядок меняется перетаскиванием.</p>
+      </div>
+
+      <div class="card-cyan" style="border:1px solid rgba(0,212,255,0.3);padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">📅</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">Календарь</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Месяц и неделя; задачи раскидываются перетаскиванием или конвейером «Раскидать».</p>
+      </div>
+
+      <div class="card" style="padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">🕘</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">История</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Поиск, теги, фильтры «сегодня / 7 дней / месяц», выполненное отдельно.</p>
+      </div>
+
+      <div class="card-gold" style="border:1px solid rgba(255,209,102,0.3);padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">🌠</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">Желания</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Большая цель превращается в шаги-задачи с общим тегом.</p>
+      </div>
+
+      <div class="card" style="padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">🌌</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">Карта мыслей</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Облако слов и граф-сферы с семантическим зумом.</p>
+      </div>
+
+      <div class="card-accent" style="border:1px solid var(--line-accent);padding:26px 28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:calc(var(--fs-h1)*0.8);line-height:1">🤖</div>
+        <h3 style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:13px 0 0;color:var(--primary)">ИИ-чат</h3>
+        <p class="muted" style="font-size:var(--fs-small);line-height:1.6;margin:7px 0 0">Помнит все записи и отвечает на вопросы о твоих планах.</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>

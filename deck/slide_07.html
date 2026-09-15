@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Хэзэнштейн — Желания становятся планами</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .h1{font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-.5px;color:var(--primary);margin:0}
+  .sub{font-family:var(--font-body);font-weight:400;font-size:var(--fs-h3);color:var(--muted);margin:10px 0 0}
+  .step{display:flex;align-items:center;gap:18px;position:relative;z-index:1}
+  .step-num{width:40px;height:40px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-weight:800;font-size:17px;color:#fff;background:linear-gradient(135deg,var(--accent),#00D4FF);box-shadow:0 0 20px rgba(108,71,255,.45)}
+  .step .card{margin-left:2px;padding:17px 20px;display:flex;align-items:flex-start;gap:12px;flex:1}
+  .step .card p{margin:0;font-size:var(--fs-body);line-height:1.5}
+  .emoji{font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif;font-size:20px;flex:none;line-height:1.45}
+  .lead{font-family:var(--font-heading);font-weight:700;color:var(--primary)}
+  .rest{color:var(--muted)}
+  .name{color:var(--primary);font-weight:600}
+  .tag{display:inline-flex;align-items:center;padding:1px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid var(--line-accent);font-family:var(--font-heading);font-weight:600;font-size:var(--fs-small);vertical-align:1px}
+  .rail{position:absolute;left:19px;top:26px;bottom:26px;width:2px;background:linear-gradient(180deg,rgba(108,71,255,.55),rgba(0,212,255,.35));z-index:0}
+  .shadow-top{box-shadow:0 44px 96px rgba(0,0,0,.72),0 0 110px rgba(0,212,255,.13)}
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:480px;height:480px;right:-170px;top:-180px;"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:380px;height:380px;left:-150px;bottom:-160px;"></div>
+
+  <div class="relative z-10 h-full flex" style="padding:52px 60px 46px 64px;gap:34px;">
+
+    <!-- LEFT: title + step chain -->
+    <div class="flex flex-col" style="width:530px;flex:none;">
+      <h1 class="h1">Желание <span class="grad-text">→ план</span> <span class="cyan-text">→</span> задачи</h1>
+      <p class="sub">Загадал — ИИ превратил в конкретику</p>
+
+      <div class="relative flex-1 flex flex-col justify-center" style="gap:20px;margin-top:8px;">
+        <div class="rail" data-decor aria-hidden="true"></div>
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="card">
+            <span class="emoji">🌠</span>
+            <p><span class="lead">Загадываешь желание</span> <span class="rest">— ИИ подбирает иконку, категорию и пишет план из шагов.</span></p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="card">
+            <span class="emoji">✅</span>
+            <p><span class="lead">Каждый шаг становится задачей</span> <span class="rest">в тудушке с общим тегом, например <span class="tag" style="color:#B9A3FF;">#карелия</span>.</span></p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="card">
+            <span class="emoji">💬</span>
+            <p><span class="lead">Обсуждаешь с наставниками:</span> <span class="rest"><span class="name">Практик</span>, <span class="name">Скептик</span>, <span class="name">Мечтатель</span>, <span class="name">Философ</span> — каждый смотрит на цель со своей стороны.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: two overlapping screenshots -->
+    <div class="flex-1 relative">
+      <div style="position:absolute;left:91px;top:2px;width:410px;">
+        <img src="../assets/shot_wishform.webp" alt="Форма желания, заполненная ИИ" class="phone-shot" style="height:555px;width:auto;display:block;">
+        <img src="../assets/shot_wishchat.webp" alt="Чат с наставниками по желанию" class="phone-shot shadow-top" style="height:500px;width:auto;display:block;position:absolute;left:180px;top:62px;z-index:2;">
+        <p class="shot-caption" style="color:var(--muted);position:absolute;left:0;right:-40px;top:580px;text-align:center;line-height:1.6;">ИИ сам заполнил форму желания и советует, с чего начать</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>

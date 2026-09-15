@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Хэзэнштейн — Фокус, а не завал</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .h1{font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.08;letter-spacing:-.5px;color:var(--primary)}
+  .sub{font-family:var(--font-body);font-weight:400;font-size:var(--fs-h3);line-height:1.4;color:var(--muted)}
+  .row{display:flex;align-items:center;gap:16px}
+  .row-icon{width:48px;height:48px;border-radius:14px;background:var(--bg-card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji','DejaVu Sans',sans-serif}
+  .row p{font-size:var(--fs-h3);line-height:1.35;margin:0}
+  .lead{font-family:var(--font-heading);font-weight:700;color:var(--primary)}
+  .rest{color:var(--muted)}
+  .accent-line{border-left:3px solid var(--cyan);padding-left:18px}
+  .accent-line p{margin:0;font-family:var(--font-heading);font-weight:600;font-size:var(--fs-h3);line-height:1.42}
+  .shadow-top{box-shadow:0 44px 96px rgba(0,0,0,.72),0 0 110px rgba(0,212,255,.13)}
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:470px;height:470px;left:-170px;top:-190px;"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:430px;height:430px;right:-150px;bottom:-180px;"></div>
+
+  <div class="relative z-10 h-full flex" style="padding:54px 60px 46px 64px;gap:36px;">
+
+    <!-- LEFT: copy -->
+    <div class="flex flex-col" style="width:660px;flex:none;">
+      <h1 class="h1"><span class="grad-text">Фокус</span>, а не завал</h1>
+      <p class="sub" style="margin:10px 0 0;">На главном экране всегда ровно одна задача</p>
+
+      <div class="flex flex-col" style="gap:21px;margin-top:42px;">
+        <div class="row">
+          <div class="row-icon">👆</div>
+          <p><span class="lead">Тап по карточке</span> <span class="rest">— открыть задачу</span></p>
+        </div>
+        <div class="row">
+          <div class="row-icon">➡️</div>
+          <p><span class="lead">Свайп вправо</span> <span class="rest">— пропустить и перейти к следующей</span></p>
+        </div>
+        <div class="row">
+          <div class="row-icon"><span style="font-family:'DejaVu Sans',sans-serif;font-size:26px;color:var(--primary);">⠿</span></div>
+          <p><span class="lead">В тудушке тянешь карточку</span> <span class="rest">— соседи подвинуваются сами</span></p>
+        </div>
+      </div>
+
+      <div class="accent-line" style="margin-top:auto;">
+        <p class="cyan-text"><span class="material-icons" aria-hidden="true" style="font-size:20px;vertical-align:-4px;margin-right:8px;">center_focus_strong</span>Очередь вместо кладбища дел: ты видишь то, что нужно сделать сейчас</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: two overlapping screenshots -->
+    <div class="flex flex-col flex-1 relative">
+      <div class="relative flex-1">
+        <img src="../assets/shot_main.webp" alt="Главный экран: карточка фокуса и очередь" class="phone-shot absolute" style="height:490px;width:auto;left:0;top:62px;display:block;">
+        <img src="../assets/shot_todo_rich.webp" alt="Тудушка: 14 задач с датами" class="phone-shot shadow-top absolute" style="height:560px;width:auto;right:0;top:0;z-index:2;display:block;">
+      </div>
+      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:12px 0 0;line-height:1.6;">Карточка фокуса: +2 в очереди · Тудушка: 14 задач, у каждой дата</p>
+    </div>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>

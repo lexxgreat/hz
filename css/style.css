@@ -691,3 +691,92 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   .caret { animation: none; }
   .btn, .card { transition: none; }
 }
+
+/* ============================================================
+   ДЕКА — десктопная версия в виде презентации (слайды 1280×720)
+   Мобильные устройства (<1024px / портрет) видят обычную страницу.
+   ============================================================ */
+
+.deck {
+  display: none;
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  background: var(--bg);
+  scrollbar-width: none;
+}
+
+.deck::-webkit-scrollbar { display: none; }
+
+.deck-slide {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.deck-frame {
+  width: 1280px;   /* до старта JS; далее ставится точный масштаб */
+  height: 720px;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.deck-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: var(--bg);
+}
+
+.deck-dots { display: none; }
+.deck-cta { display: none; }
+
+@media (min-width: 1024px) and (orientation: landscape) and (min-height: 560px) {
+  /* Десктоп: показываем презентацию вместо обычной страницы */
+  .nav, main, .footer { display: none !important; }
+
+  .deck { display: block; }
+
+  .deck-dots {
+    display: flex;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 10px;
+    z-index: 60;
+  }
+
+  .deck-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.16);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .deck-dot:hover { background: rgba(255, 255, 255, 0.38); }
+
+  .deck-dot.active {
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    transform: scale(1.35);
+    box-shadow: 0 0 12px rgba(108, 71, 255, 0.55);
+  }
+
+  .deck-cta {
+    display: inline-flex;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 60;
+  }
+}

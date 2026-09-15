@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — Как это изменит твою жизнь</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:var(--bg)}</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-gold" data-decor aria-hidden="true" style="width:500px;height:500px;right:-170px;top:-210px"></div>
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:620px;height:620px;left:-230px;bottom:-260px"></div>
+
+  <div style="position:relative;z-index:1;display:flex;align-items:center;gap:48px;height:100%;padding:56px 64px">
+
+    <!-- left: copy + CTA -->
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:30px">
+
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.12;letter-spacing:-0.5px">
+        Как это изменит <span class="grad-text">твою жизнь</span>
+      </h1>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">wb_sunny</span>
+          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
+            <span style="font-family:var(--font-heading);font-weight:800">Утром —</span>
+            <span class="muted"> открываешь и видишь одну задачу дня, а не 47 дел</span>
+          </p>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">event</span>
+          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
+            <span style="font-family:var(--font-heading);font-weight:800">Днём —</span>
+            <span class="muted"> планы сами встают в календарь из одной строки</span>
+          </p>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">nights_stay</span>
+          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
+            <span style="font-family:var(--font-heading);font-weight:800">Вечером в 22:00 —</span>
+            <span class="muted"> приложение подводит итог: что сделано, сколько потрачено, какое настроение</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="card card-accent" style="padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h2);line-height:1.2">Попробуй прямо сейчас</div>
+        <a class="grad-text" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener" style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.5px;text-decoration:none">lexxgreat.github.io/hz3</a>
+        <p class="muted" style="margin:2px 0 0;font-size:var(--fs-small);line-height:1.55">Открывается в браузере · ставится на телефон за 10 секунд · вход анонимный · данные только твои</p>
+      </div>
+
+    </div>
+
+    <!-- right: rotated evening-summary screenshot -->
+    <figure style="margin:0;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:16px">
+      <img src="../assets/shot_summary.webp" alt="Вечерний итог дня" class="phone-shot" style="height:555px;width:auto;display:block;transform:rotate(2.5deg)">
+      <figcaption class="shot-caption">Вечерний итог — как за хороший день</figcaption>
+    </figure>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>

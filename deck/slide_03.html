@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — Одна строка, и всё само</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .shot-caption{color:var(--muted)}
+  @keyframes hz-blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+  .hz-caret{display:inline-block;width:3px;height:.95em;background:var(--cyan);vertical-align:-.12em;border-radius:2px;margin-left:6px;animation:hz-blink 1.1s steps(1) infinite}
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- ambient orbs -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:560px;height:560px;left:-220px;top:-240px;opacity:.3"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:540px;height:540px;right:-200px;bottom:-260px;opacity:.26"></div>
+
+  <div style="position:relative;z-index:10;height:100%;display:flex;gap:40px;padding:48px 56px;align-items:stretch">
+
+    <!-- LEFT : the magic explained -->
+    <div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center">
+
+      <div>
+        <span class="chip" style="font-size:var(--fs-small)">⚡ Главная фишка</span>
+      </div>
+
+      <h1 style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.12;margin:18px 0 0;color:var(--primary)">
+        Одна строка — <span class="grad-text">и всё само</span>
+      </h1>
+
+      <!-- the input example -->
+      <div class="card-accent" style="margin-top:22px;border:1px solid var(--line-accent);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:14px">
+        <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px">edit</span>
+        <span style="font-family:var(--font-heading);font-weight:600;font-size:var(--fs-h2);line-height:1.3;color:var(--primary)">«Позвонить маме завтра в 18:00»<span class="hz-caret" aria-hidden="true"></span></span>
+      </div>
+
+      <!-- what the AI does -->
+      <div style="margin-top:26px;display:flex;flex-direction:column;gap:15px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#FFFFFF;font-family:var(--font-num);font-weight:800;font-size:var(--fs-body)">1</span>
+          <p class="muted" style="margin:0;font-size:var(--fs-h3);line-height:1.35">Понял, что это <span style="color:var(--primary);font-weight:600">задача</span>, а не заметка</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#FFFFFF;font-family:var(--font-num);font-weight:800;font-size:var(--fs-body)">2</span>
+          <p class="muted" style="margin:0;font-size:var(--fs-h3);line-height:1.35">Поставил её в <span style="color:var(--primary);font-weight:600">очередь тудушки</span></p>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#FFFFFF;font-family:var(--font-num);font-weight:800;font-size:var(--fs-body)">3</span>
+          <p class="muted" style="margin:0;font-size:var(--fs-h3);line-height:1.35">Расшифровал «завтра в 18:00» → <span style="color:var(--primary);font-weight:600">16 сентября, 18:00</span></p>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#FFFFFF;font-family:var(--font-num);font-weight:800;font-size:var(--fs-body)">4</span>
+          <p class="muted" style="margin:0;font-size:var(--fs-h3);line-height:1.35">Отметил в <span style="color:var(--primary);font-weight:600">календаре</span> на нужном дне</p>
+        </div>
+      </div>
+
+      <!-- voice note -->
+      <div style="margin-top:26px;display:flex;align-items:center;gap:10px">
+        <span class="material-icons" aria-hidden="true" style="color:var(--gold);font-size:19px">mic</span>
+        <span class="gold-text" style="font-size:var(--fs-small);font-weight:600;letter-spacing:.2px">Работает и с голоса: зажми микрофон и просто говори</span>
+      </div>
+
+    </div>
+
+    <!-- RIGHT : real screenshot -->
+    <div style="flex:none;width:300px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <img src="../assets/shot_todo.webp" alt="Тудушка: ИИ сам расставил даты задач" class="phone-shot" style="height:545px;width:auto;display:block">
+      <div class="shot-caption" style="margin-top:14px;max-width:300px;text-align:center;line-height:1.6">
+        ИИ сам поставил даты: до пятницы → 18 сент., в субботу → 19 сент., завтра в 18:00 → 16 сент.
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>

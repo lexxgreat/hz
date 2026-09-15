@@ -1,0 +1,91 @@
+/* ═══ ХЭЗЭНШТЕЙН — deck-wide design system ═══ */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  /* palette — фирменные цвета приложения */
+  --bg:#060918;
+  --bg-soft:#0B0F26;
+  --bg-card:rgba(255,255,255,0.045);
+  --primary:#F2F3FA;
+  --muted:rgba(232,236,255,0.64);
+  --faint:rgba(232,236,255,0.38);
+  --accent:#6C47FF;
+  --accent-2:#8B5CF6;
+  --accent-soft:rgba(108,71,255,0.16);
+  --cyan:#00D4FF;
+  --cyan-soft:rgba(0,212,255,0.12);
+  --gold:#FFD166;
+  --gold-soft:rgba(255,209,102,0.12);
+  --green:#2DE28B;
+  --line:rgba(255,255,255,0.09);
+  --line-accent:rgba(108,71,255,0.38);
+
+  /* typography tokens (family + size only — no bundled classes) */
+  --font-heading:'Manrope',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-num:'Manrope',sans-serif;
+  --fs-display:62px;
+  --fs-h1:42px;
+  --fs-h2:28px;
+  --fs-h3:20px;
+  --fs-body:16.5px;
+  --fs-small:13.5px;
+  --fs-micro:11px;
+}
+
+/* canvas */
+.slide{
+  width:1280px;height:720px;overflow:hidden;position:relative;
+  background:var(--bg);color:var(--primary);
+  font-family:var(--font-body);font-size:var(--fs-body);line-height:1.5;
+}
+
+/* ambient orbs (как в приложении) */
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.32;pointer-events:none}
+.orb-violet{background:#6C47FF}
+.orb-cyan{background:#00A8D4}
+.orb-gold{background:#B8860B}
+
+/* surfaces */
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.card-accent{border-color:var(--line-accent);background:linear-gradient(135deg,rgba(108,71,255,0.14),rgba(0,212,255,0.06))}
+.card-cyan{border-color:rgba(0,212,255,0.3);background:var(--cyan-soft)}
+.card-gold{border-color:rgba(255,209,102,0.3);background:var(--gold-soft)}
+
+/* emphasis */
+.grad-text{background:linear-gradient(92deg,#A78BFF 0%,#00D4FF 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gold-text{color:var(--gold)}
+.cyan-text{color:var(--cyan)}
+.muted{color:var(--muted)}
+.faint{color:var(--faint)}
+
+/* chips / badges */
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 14px;border-radius:99px;
+  border:1px solid var(--line-accent);background:var(--accent-soft);
+  font-family:var(--font-heading);font-weight:600;
+}
+.chip-cyan{border-color:rgba(0,212,255,0.35);background:var(--cyan-soft)}
+.chip-gold{border-color:rgba(255,209,102,0.35);background:var(--gold-soft)}
+
+/* phone screenshot framing (кадры реального приложения 390×844) */
+.phone-shot{
+  border-radius:30px;border:1px solid rgba(108,71,255,0.4);
+  box-shadow:0 34px 80px rgba(0,0,0,0.6),0 0 90px rgba(108,71,255,0.16);
+}
+.shot-caption{
+  font-size:var(--fs-micro);letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--faint);font-family:var(--font-heading);font-weight:600;
+}
+
+/* comparison table */
+.tbl{width:100%;border-collapse:separate;border-spacing:0}
+.tbl th{font-family:var(--font-heading);font-weight:700;text-align:left}
+.tbl td,.tbl th{padding:13px 18px;border-bottom:1px solid var(--line)}
+.tbl .yes{color:var(--green);font-weight:700}
+.tbl .no{color:rgba(255,120,130,0.75);font-weight:600}

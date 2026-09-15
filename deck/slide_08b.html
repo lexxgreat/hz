@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — ИИ-чат</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:var(--bg)}</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:620px;height:620px;left:-230px;top:-250px"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:540px;height:540px;right:-180px;bottom:-230px"></div>
+
+  <div style="position:relative;z-index:1;display:flex;align-items:center;gap:56px;height:100%;padding:56px 64px">
+
+    <!-- left: copy -->
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:24px">
+      <div><span class="chip" style="font-size:var(--fs-small)">🤖 ИИ-чат</span></div>
+
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.14;letter-spacing:-0.5px">
+        ИИ, который <span class="grad-text">знает твои планы</span>
+      </h1>
+
+      <div class="card card-accent" style="padding:22px 26px;display:flex;gap:16px;align-items:flex-start">
+        <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:28px;line-height:1;margin-top:2px">forum</span>
+        <div>
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin-bottom:6px">Помнит все записи</div>
+          <p class="muted" style="margin:0;font-size:var(--fs-body);line-height:1.55">Спроси «что у меня по планам на неделю» — получишь сводку по заметкам, задачам и желаниям. Никаких ручных отчётов.</p>
+        </div>
+      </div>
+
+      <div class="card card-cyan" style="padding:22px 26px;display:flex;gap:16px;align-items:flex-start">
+        <span class="material-icons" aria-hidden="true" style="color:var(--gold);font-size:28px;line-height:1;margin-top:2px">nights_stay</span>
+        <div>
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin-bottom:6px">Итог дня в 22:00</div>
+          <p class="muted" style="margin:0;font-size:var(--fs-body);line-height:1.55">Вечером приложение само подведёт итог: что сделано, сколько потрачено, какое настроение.</p>
+        </div>
+      </div>
+
+      <p class="muted" style="margin:4px 0 0;font-size:var(--fs-body);display:flex;align-items:center;gap:10px">
+        <span class="material-icons" aria-hidden="true" style="color:var(--accent-2);font-size:20px">verified_user</span>
+        <span>Вход анонимный — данные только твои</span>
+      </p>
+    </div>
+
+    <!-- right: real screenshot -->
+    <figure style="margin:0;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <img src="../assets/shot_chat.webp" alt="ИИ-чат: сводка планов по всей базе заметок" class="phone-shot" style="height:560px;width:auto;display:block">
+      <figcaption class="shot-caption">Спросил о планах — получил сводку по всей базе</figcaption>
+    </figure>
+
+  </div>
+</div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
+</body>
+</html>
