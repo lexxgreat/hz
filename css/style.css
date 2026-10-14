@@ -56,6 +56,36 @@ img { max-width: 100%; }
 a { color: var(--cyan-soft); text-decoration: none; }
 a:hover { text-decoration: none; }
 
+/* ── v101-фиксы: потерянные при редизайне стили фона и бейджей ──
+   #stars без стилей занимал дефолтные 300×150 в потоке — уезжал контент на ~157px вниз
+   (фидбек: «вверху какой-то отступ и на компе и на мобильном»; на десктопе дека
+   дополнительно обрезалась снизу — 100vh начинались ниже канваса). */
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Орбы-декор дублируют body::before (те же три свечения) — не нужны */
+.orbs { display: none; }
+
+/* Полоса прогресса чтения (в HTML была, стили потеряны) */
+.progress-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--violet), var(--cyan));
+  border-radius: 0 3px 3px 0;
+  z-index: 90;
+  pointer-events: none;
+  transition: width 0.12s linear;
+}
+
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
 
 /* Тонкий тёмный скроллбар */
@@ -716,6 +746,12 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   justify-content: center;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  /* Свечение за фреймом: буквоксы слайда сливаются с фоном — нет эффекта
+     «обрезанной картинки» на широких экранах (фидбек: «обрезание экрана по краям») */
+  background:
+    radial-gradient(560px 420px at 12% 8%, rgba(108, 71, 255, 0.10), transparent 70%),
+    radial-gradient(520px 400px at 88% 92%, rgba(0, 168, 212, 0.08), transparent 70%),
+    var(--bg);
 }
 
 .deck-frame {
