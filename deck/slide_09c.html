@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хэзэнштейн — Мелочи, которых не хватает другим</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .mini{position:relative;padding:20px 22px;overflow:hidden}
+  .mini .ic{font-size:calc(var(--fs-h2)*1.05);line-height:1;font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji','DejaVu Sans',sans-serif}
+  .mini h3{font-family:var(--font-heading);font-weight:700;font-size:var(--fs-body);margin:10px 0 0;color:var(--primary);line-height:1.25}
+  .mini p{color:var(--muted);font-size:var(--fs-small);line-height:1.5;margin:7px 0 0}
+  .num{position:absolute;top:8px;right:14px;font-family:var(--font-heading);font-weight:800;font-size:calc(var(--fs-display)*0.62);line-height:1;color:rgba(255,255,255,0.05)}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:520px;height:520px;left:-220px;top:-240px;opacity:.26"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:480px;height:480px;right:-210px;bottom:-250px;opacity:.22"></div>
+
+  <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:center;padding:48px 64px 44px">
+
+    <header style="text-align:center">
+      <h1 style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.15;margin:0;color:var(--primary)">
+        Мелочи, которых <span class="grad-text">не хватает другим</span>
+      </h1>
+      <p class="muted" style="font-size:var(--fs-h3);line-height:1.4;margin:10px 0 0;font-weight:500">
+        И ещё волшебство — то, что превращает тудушку в напарника
+      </p>
+    </header>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;align-items:stretch">
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">01</div>
+        <div class="ic" aria-hidden="true">🌙</div>
+        <h3>Итог дня в 22:00</h3>
+        <p>Сам подведёт итог: что сделано, сколько потрачено, какое настроение. Разговор с собой — без усилий.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">02</div>
+        <div class="ic" aria-hidden="true">🧠</div>
+        <h3>Карта мыслей</h3>
+        <p>Облако слов: чем чаще думаешь — тем крупнее. Граф-сферы жизни и связи, которые ИИ находит сам.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">03</div>
+        <div class="ic" aria-hidden="true">🗓️</div>
+        <h3>Календарь-конвейер</h3>
+        <p>Кнопка «Раскидать» разъезжает очередь по дням за секунду. Перетаскивание, часы, план по тапу.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">04</div>
+        <div class="ic" aria-hidden="true">🔖</div>
+        <h3>Помнить всегда</h3>
+        <p>1–2 личных правила, которые Хэзэнштейн тихо напомнит утром. Важно не забыть о себе.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">05</div>
+        <div class="ic" aria-hidden="true">🔥</div>
+        <h3>Стрики и бонусы</h3>
+        <p>День без пропуска — +2 ⚡, неделя — уже ×10. Рекорды хранятся, чтобы приятно возвращаться.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">06</div>
+        <div class="ic" aria-hidden="true">💬</div>
+        <h3>ИИ знает контекст</h3>
+        <p>«Что у меня на неделе?» — сводка по твоим записям. ИИ-психолог раз в неделю подведёт итоги.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">07</div>
+        <div class="ic" aria-hidden="true">🎨</div>
+        <h3>Темы-настроения</h3>
+        <p>Космос, фонарики, минимал, бизнес, мечта — подстройка под вечер или рабочий ритм.</p>
+      </div>
+
+      <div class="card mini">
+        <div class="num" data-decor aria-hidden="true">08</div>
+        <div class="ic" aria-hidden="true">⚡</div>
+        <h3>Работает везде</h3>
+        <p>Телефон, планшет, компьютер. Офлайн-режим: мысли ловятся даже в метро и самолёте.</p>
+      </div>
+
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:26px">
+      <div class="card-cyan" style="display:inline-flex;align-items:center;gap:12px;border-radius:99px;padding:13px 26px">
+        <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:20px">auto_awesome</span>
+        <span class="cyan-text" style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-body);line-height:1.3">
+          Каждая мелочь — про заботу, а не про дедлайны
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

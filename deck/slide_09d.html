@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хэзэнштейн — Как это меняет день</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .time-card{position:relative;padding:30px 28px;overflow:hidden;text-align:center}
+  .time-ic{font-size:calc(var(--fs-display)*0.82);line-height:1;display:block;font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji','DejaVu Sans',sans-serif}
+  .time-card h3{font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:14px 0 0;color:var(--primary)}
+  .time-card p{color:var(--muted);font-size:var(--fs-body);line-height:1.6;margin:10px 0 0;text-align:left}
+  .manifest{font-family:var(--font-heading);font-weight:600;font-size:var(--fs-body);line-height:1.65;color:var(--muted);max-width:980px;margin:26px auto 0;text-align:center;font-style:italic}
+  .manifest b{color:var(--primary);font-style:normal}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:520px;height:520px;left:-210px;bottom:-260px;opacity:.22"></div>
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:560px;height:560px;right:-230px;top:-250px;opacity:.28"></div>
+
+  <div style="position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:center;padding:48px 64px 44px">
+
+    <header style="text-align:center">
+      <h1 style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.15;margin:0;color:var(--primary)">
+        Как это меняет <span class="grad-text">день</span>
+      </h1>
+      <p class="muted" style="font-size:var(--fs-h3);line-height:1.4;margin:10px 0 0;font-weight:500">
+        Не «продуктивность ради продуктивности» — а спокойный ритм
+      </p>
+    </header>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px;align-items:stretch">
+
+      <div class="card time-card">
+        <span class="time-ic" aria-hidden="true">🌅</span>
+        <h3>Утро</h3>
+        <p>Открываешь — а там одна задача и тихое напоминание от Хэзэнштейна: «двигаться каждый день». Не лента, не уведомления — только твой фокус.</p>
+      </div>
+
+      <div class="card time-card">
+        <span class="time-ic" aria-hidden="true">☀️</span>
+        <h3>День</h3>
+        <p>Мысль прилетела — записал одной строкой и забыл: приложение само вспомнит вовремя. Дела разлетаются по календарю, мечта потихоньку двигается шагами.</p>
+      </div>
+
+      <div class="card time-card">
+        <span class="time-ic" aria-hidden="true">🌙</span>
+        <h3>Вечер</h3>
+        <p>Итог дня в 22:00: три победы, настроение, потрачено. Зачёркнутые строки дают тот самый кайф — и хочется завтра повторить.</p>
+      </div>
+
+    </div>
+
+    <blockquote class="manifest">
+      «<b>Мы делали Хэзэнштейн с любовью</b> — как маленький талисман, который всегда в кармане. Он не гонит и не стыдит. Он просто ловит твои мысли, бережёт их и превращает в шаги, которыми можно гордиться.»
+    </blockquote>
+
+  </div>
+</div>
+</body>
+</html>
