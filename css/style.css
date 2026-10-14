@@ -335,7 +335,7 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   line-height: 1.5;
 }
 
-.phone-tilt { transform: rotate(2.5deg); }
+.phone-tilt { transform: rotate(8deg); }
 
 /* ---------- Секции-сплиты ---------- */
 
@@ -614,6 +614,119 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   .tbl td:last-child::before { content: "Хэзэнштейн: "; }
 }
 
+/* ---------- Кайф зачёркивания: интерактивное демо ---------- */
+
+.cross-demo { width: 100%; max-width: 420px; margin: 0 auto; }
+
+.cross-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.cross-card:hover { border-color: rgba(108, 71, 255, 0.45); background: var(--card-strong); }
+.cross-card.is-done { border-color: rgba(108, 71, 255, 0.55); }
+
+.cross-meta { color: var(--muted); font-size: 0.82rem; margin-bottom: 8px; }
+
+.cross-text {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  font: 700 1.18rem var(--font-head);
+  color: var(--text);
+  transition: color 0.4s ease 0.35s;
+}
+
+.is-done .cross-text { color: var(--muted); }
+
+/* символ Х: два штриха по очереди накрывают задачу */
+.cross-text::before,
+.cross-text::after {
+  content: '';
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  top: calc(50% - 2px);
+  height: 3px;
+  border-radius: 3px;
+  background: var(--grad);
+  transform: rotate(8deg) scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.45s cubic-bezier(0.6, 0, 0.3, 1);
+}
+
+.cross-text::after { transform: rotate(-8deg) scaleX(0); transition-delay: 0.24s; }
+.is-done .cross-text::before { transform: rotate(8deg) scaleX(1); }
+.is-done .cross-text::after { transform: rotate(-8deg) scaleX(1); }
+
+.cross-actions { margin-top: 16px; display: flex; }
+
+.cross-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--violet), #8F6BFF 55%, var(--cyan));
+  color: #fff;
+  font: 700 0.95rem var(--font-head);
+  transition: opacity 0.3s ease;
+}
+
+.cross-card.is-done .cross-btn { opacity: 0.55; }
+
+.cross-btn .note-donebox {
+  flex: none;
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+}
+
+.is-done .cross-btn .note-donebox::after {
+  content: '✓';
+  position: absolute;
+  left: 1px;
+  top: -6px;
+  font: 800 0.85rem var(--font-head);
+  color: #fff;
+}
+
+/* искры летят поверх карточки */
+.cross-card canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cross-zap {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.7rem;
+  animation: zapPop 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+@keyframes zapPop {
+  0% { transform: scale(0) rotate(-25deg); opacity: 0; }
+  60% { transform: scale(1.35) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.cross-hint { margin-top: 14px; color: var(--muted); font-size: 0.95rem; text-align: center; }
+
 /* ---------- CTA ---------- */
 
 .cta-grid {
@@ -741,6 +854,7 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   .reveal { opacity: 1; transform: none; transition: none; }
   .caret { animation: none; }
   .btn, .card { transition: none; }
+  .cross-card, .cross-text, .cross-text::before, .cross-text::after, .cross-btn, .cross-zap { transition: none; animation: none; }
 }
 
 /* ============================================================
