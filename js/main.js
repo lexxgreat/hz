@@ -120,90 +120,238 @@
   }
 })();
 
-/* ---- Демо «Кайф зачёркивания»: тап — задачу накрывает символ Х, разлетаются искры, падает ⚡ ---- */
+
+/* ---- Демо «Кайф зачёркивания»: живой скриншот главного экрана + жест Х, порт из приложения ---- */
 (function () {
-  var card = document.getElementById('crossCard');
-  if (!card) return;
+  var phone = document.getElementById('crossPhone');
+  if (!phone) return;
+  var canvas = document.getElementById('xGestureCanvas');
   var hint = document.getElementById('crossHint');
-  var canvas = document.getElementById('confetti');
-  var ctx = canvas.getContext('2d');
-  var sparks = [];
-  var raf = null;
+  var strike = document.getElementById('crossStrike');
+  var zap = document.getElementById('crossZap');
+  var ctx = canvas ? canvas.getContext('2d') : null;
+  if (!canvas || !ctx || !hint || !strike) return;
+
+  var strokes = [];        // завершённые штрихи: {points, type, time, matched}
+  var current = null;      // штрих в работе
+  var fadeRunning = false;
+  var drawScheduled = false;
   var resetTimer = null;
-  var done = false;
+  var downAt = 0;
   var origHint = hint.textContent;
 
   function sizeCanvas() {
-    var r = card.getBoundingClientRect();
+    var r = canvas.getBoundingClientRect();
     if (!r.width || !r.height) return;
-    canvas.width = Math.max(1, Math.round(r.width * (window.devicePixelRatio || 1)));
-    canvas.height = Math.max(1, Math.round(r.height * (window.devicePixelRatio || 1)));
-    ctx.setTransform(canvas.width / r.width, 0, 0, canvas.height / r.height, 0, 0);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    ctx.setTransform(w / r.width, 0, 0, h / r.height, 0, 0);
   }
 
-  var COLORS = ['#8F6BFF', '#6C47FF', '#00D4FF', '#FFD166', '#FF5470', '#7CFFB2'];
-  function burst(x, y, n) {
-    for (var i = 0; i < n; i++) {
-      var a = Math.random() * 6.2832;
-      var sp = 1.6 + Math.random() * 4.2;
-      sparks.push({
-        x: x, y: y,
-        vx: Math.cos(a) * sp,
-        vy: Math.sin(a) * sp - 2.2,
-        life: 0.9 + Math.random() * 0.3,
-        r: 1.4 + Math.random() * 2.4,
-        c: COLORS[(Math.random() * COLORS.length) | 0]
-      });
-    }
-    if (!raf) raf = requestAnimationFrame(tick);
-  }
-  function tick() {
-    var w = ctx.canvas.clientWidth || parseFloat(canvas.style.width) || canvas.width;
-    var h = ctx.canvas.clientHeight || parseFloat(canvas.style.height) || canvas.height;
-    ctx.clearRect(0, 0, w, h);
-    sparks = sparks.filter(function (p) { return p.life > 0; });
-    for (var i = 0; i < sparks.length; i++) {
-      var p = sparks[i];
-      p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.life -= 0.022;
-      ctx.globalAlpha = Math.max(p.life, 0);
-      ctx.fillStyle = p.c;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, 6.2832);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    if (sparks.length) { raf = requestAnimationFrame(tick); } else { raf = null; ctx.clearRect(0, 0, w, h); }
+  // штрихи рисуются как в приложении: широкое свечение + тонкое ядро
+  function drawPath(pts, alpha, color, width) {
+    if (pts.length < 2) return;
+    ctx.strokeStyle = color.replace('ALPHA', alpha);
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.stroke();
   }
 
-  function play() {
-    if (done) return;
-    done = true;
+  function drawAll() {
     sizeCanvas();
-    card.classList.add('is-done');
-    var zap = document.createElement('span');
-    zap.className = 'cross-zap';
-    zap.textContent = '⚡';
-    card.appendChild(zap);
-    var r = card.getBoundingClientRect();
-    burst(r.width * 0.86, r.height * 0.38, 24);
-    burst(r.width * 0.62, r.height * 0.5, 16);
-    hint.textContent = '⚡ Заряд капнул! Пару секунд — и можно попробовать снова';
-    resetTimer = setTimeout(reset, 3400);
-  }
-  function reset() {
-    done = false;
-    card.classList.remove('is-done');
-    var z = card.querySelector('.cross-zap');
-    if (z) z.remove();
-    sparks = [];
-    if (raf) { cancelAnimationFrame(raf); raf = null; }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var now = Date.now();
+    strokes = strokes.filter(function (s) { return now - s.time < 1500; });
+    for (var i = 0; i < strokes.length; i++) {
+      var s = strokes[i];
+      var a = Math.max(0, 1 - (now - s.time) / 1500);
+      if (s.matched) {
+        drawPath(s.points, (0.5 * a).toFixed(3), 'rgba(0,255,140,ALPHA)', 14);
+        drawPath(s.points, a.toFixed(3), 'rgba(0,255,140,ALPHA)', 6);
+      } else {
+        drawPath(s.points, (0.35 * a).toFixed(3), 'rgba(0,212,255,ALPHA)', 14);
+        drawPath(s.points, (0.9 * a).toFixed(3), 'rgba(108,71,255,ALPHA)', 4);
+      }
+    }
+    if (current && current.points.length >= 2) {
+      drawPath(current.points, '0.5', 'rgba(0,212,255,ALPHA)', 14);
+      drawPath(current.points, '1', 'rgba(108,71,255,ALPHA)', 4);
+    }
+  }
+
+  function scheduleDraw() {
+    if (drawScheduled) return;
+    drawScheduled = true;
+    requestAnimationFrame(function () { drawScheduled = false; drawAll(); });
+  }
+
+  function startFade() {
+    if (fadeRunning) return;
+    fadeRunning = true;
+    var tick = function () {
+      drawAll();
+      if (strokes.length > 0 || current) { requestAnimationFrame(tick); }
+      else { fadeRunning = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // празднование — как celebrateTaskDone в приложении: ✓ + 14 эмодзи-искры
+  function celebrate() {
+    var overlay = document.createElement('div');
+    overlay.className = 'celebrate-overlay';
+    var check = document.createElement('div');
+    check.className = 'celebrate-check';
+    check.textContent = '✓';
+    overlay.appendChild(check);
+    var particles = ['🎉', '✨', '⭐', '💥', '🔥', '⚡'];
+    var count = 14;
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement('span');
+      p.className = 'celebrate-particle';
+      p.textContent = particles[Math.floor(Math.random() * particles.length)];
+      var angle = (360 / count) * i + (Math.random() * 20 - 10);
+      var distance = 80 + Math.random() * 70;
+      var rad = angle * Math.PI / 180;
+      p.style.setProperty('--tx', Math.cos(rad) * distance + 'px');
+      p.style.setProperty('--ty', Math.sin(rad) * distance + 'px');
+      p.style.animationDelay = (Math.random() * 0.06) + 's';
+      overlay.appendChild(p);
+    }
+    phone.appendChild(overlay);
+    if (navigator.vibrate) { try { navigator.vibrate(40); } catch (e) {} }
+    setTimeout(function () { overlay.remove(); }, 1150);
+  }
+
+  function success() {
+    phone.classList.add('is-done');
+    strike.classList.add('on');
+    if (zap) zap.hidden = false;
+    celebrate();
+    hint.textContent = '✓ Задача выполнена — искры, ⚡ и кайф. Ещё раз?';
+    resetTimer = setTimeout(reset, 3600);
+  }
+
+  function reset() {
+    phone.classList.remove('is-done');
+    strike.classList.remove('on');
+    if (zap) zap.hidden = true;
     hint.textContent = origHint;
   }
 
-  card.addEventListener('click', play);
-  card.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+  function pt(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  phone.addEventListener('pointerdown', function (e) {
+    if (current || phone.classList.contains('is-done')) return;
+    e.preventDefault();
+    if (phone.setPointerCapture) { try { phone.setPointerCapture(e.pointerId); } catch (err) {} }
+    sizeCanvas();
+    current = { points: [pt(e)], time: 0 };
+    downAt = Date.now();
+    startFade();
+  });
+
+  phone.addEventListener('pointermove', function (e) {
+    if (!current) return;
+    var p = pt(e);
+    var last = current.points[current.points.length - 1];
+    if (Math.abs(last.x - p.x) < 2 && Math.abs(last.y - p.y) < 2) return;
+    current.points.push(p);
+    scheduleDraw();
+  });
+
+  phone.addEventListener('pointerup', function (e) {
+    if (!current) return;
+    gestureEnd(pt(e));
+  });
+
+  phone.addEventListener('pointercancel', function () {
+    if (!current) return;
+    strokes.push(current); current = null; startFade();
+  });
+
+  function gestureEnd(p) {
+    var pts = current.points;
+    var last = pts[pts.length - 1];
+    if (Math.abs(last.x - p.x) > 2 || Math.abs(last.y - p.y) > 2) pts.push(p);
+    current.time = Date.now();
+    var start = pts[0], end = pts[pts.length - 1];
+    var dx = end.x - start.x, dy = end.y - start.y;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    var r = canvas.getBoundingClientRect();
+    var minSide = Math.min(r.width, r.height);
+
+    // тап почти без движения — сами показываем жест
+    if (dist < 14 && Date.now() - downAt < 400) { current = null; playAuto(); return; }
+
+    var saveAndFade = function () { strokes.push(current); current = null; startFade(); };
+    if (dist < minSide * 0.5) { saveAndFade(); return; }
+    var ratio = Math.abs(dx) / (Math.abs(dy) || 1);
+    if (ratio < 0.4 || ratio > 2.5) { saveAndFade(); return; }
+
+    var type = (dx * dy > 0) ? 'backslash' : 'slash';
+    var midX = (start.x + end.x) / 2, midY = (start.y + end.y) / 2;
+    var now = Date.now();
+    current.type = type;
+    strokes.push(current);
+    current = null;
+    strokes = strokes.filter(function (s) { return now - s.time < 1200; });
+    var tol = minSide * 0.4;
+    var match = null;
+    for (var i = 0; i < strokes.length; i++) {
+      var s = strokes[i];
+      if (s.type && s.type !== type) {
+        var mx = (s.points[0].x + s.points[s.points.length - 1].x) / 2;
+        var my = (s.points[0].y + s.points[s.points.length - 1].y) / 2;
+        if (Math.abs(mx - midX) < tol && Math.abs(my - midY) < tol) { match = s; break; }
+      }
+    }
+    if (match) {
+      match.matched = true; match.time = now;
+      var ls = strokes[strokes.length - 1];
+      if (ls) { ls.matched = true; ls.time = now; }
+      success();
+    }
+    startFade();
+  }
+
+  // тап = автопоказ: два штриха Х по экрану, как будто провёл пальцем
+  function playAuto() {
+    if (phone.classList.contains('is-done') || current) return;
+    var r = canvas.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    animateStroke({ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }, function () {
+      animateStroke({ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }, function () {});
+    });
+  }
+
+  function animateStroke(a, b, done) {
+    var t0 = performance.now(), D = 420;
+    current = { points: [{ x: a.x, y: a.y }], time: 0 };
+    startFade();
+    var step = function (t) {
+      if (!current) { if (done) done(); return; }
+      var k = Math.min(1, (t - t0) / D);
+      var p = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
+      var last = current.points[current.points.length - 1];
+      if (Math.abs(last.x - p.x) > 2 || Math.abs(last.y - p.y) > 2) current.points.push(p);
+      drawAll();
+      if (k < 1) { requestAnimationFrame(step); }
+      else { var cb = done; gestureEnd(b); if (cb) cb(); }
+    };
+    requestAnimationFrame(step);
+  }
+
+  phone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playAuto(); }
   });
   window.addEventListener('resize', sizeCanvas);
   sizeCanvas();

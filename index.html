@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261014f">
+<link rel="stylesheet" href="css/style.css?v=20261014g">
 </head>
 <body>
 
@@ -159,7 +159,7 @@
           <li><b>«Пропустить»</b> — честно отложил, очередь сама подвинула следующую</li>
           <li><b>Жест ✕</b> на экране — задача выполнена одним росчерком</li>
         </ul>
-        <p class="bridge bridge-left reveal">Дела «на потом» ждут в разделе по датам — они не мелькают и не давят. Психология без давления, порядок без нерфов.</p>
+        <p class="bridge bridge-left reveal">Дела «на потом» ждут в разделе по датам — они не мелькают и не давят. Психология без давления, порядок без нервов.</p>
       </div>
     </div>
   </section>
@@ -176,15 +176,13 @@
           <p class="note-gold reveal">Психологи зовут это «петлёй завершения» — мозг любит доводить до конца. Мы просто не мешаем ему это любить.</p>
         </div>
         <div class="split-visual reveal">
-          <div class="cross-demo">
-            <div class="cross-card" id="crossCard" role="button" tabindex="0" aria-label="Тапни, чтобы выполнить задачу">
-              <div class="cross-meta">#1 · Задача · сегодня</div>
-              <div class="cross-text" id="crossText">Тренировка: спина и руки</div>
-              <div class="cross-actions"><span class="cross-btn" id="crossBtn"><span class="note-donebox" aria-hidden="true"></span>Выполнить</span></div>
-              <canvas id="confetti" aria-hidden="true"></canvas>
-            </div>
-            <p class="cross-hint" id="crossHint">👆 Тапни по карточке — попробуй сам</p>
+          <div class="phone cross-phone" id="crossPhone" role="button" tabindex="0" aria-label="Нарисуй на экране символ Х — задача в фокусе выполнится, как в приложении">
+            <img src="assets/shot_main.webp" width="780" height="1688" alt="Главный экран Хэзэнштейна: «Купить беговые кроссовки и экипирование» в фокусе" loading="lazy" decoding="async">
+            <canvas id="xGestureCanvas" aria-hidden="true"></canvas>
+            <div class="cross-strike" id="crossStrike" aria-hidden="true"></div>
+            <span class="cross-zap" id="crossZap" aria-hidden="true" hidden>⚡</span>
           </div>
+          <p class="cross-hint" id="crossHint">👆 Нарисуй на экране символ Х — или просто тапни</p>
         </div>
       </div>
     </div>
@@ -407,7 +405,7 @@
 <nav class="deck-dots" aria-label="Навигация по слайдам"></nav>
 <a class="btn btn-primary btn-sm deck-cta" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
 
-<script src="js/deck.js?v=20261014f" defer></script>
-<script src="js/main.js?v=20261014f" defer></script>
+<script src="js/deck.js?v=20261014g" defer></script>
+<script src="js/main.js?v=20261014g" defer></script>
 </body>
 </html>
