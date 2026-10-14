@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261014h">
+<link rel="stylesheet" href="css/style.css?v=20261014i">
 </head>
 <body>
 
@@ -117,13 +117,22 @@
       <div class="split">
         <div class="split-copy">
           <span class="chip chip-violet reveal">Главная фишка</span>
-          <h2 class="reveal">Ловец мыслей: <span class="grad-text">написал — и всё само</span></h2>
-          <p class="reveal">Одна строка — как будто шепнул другу. ИИ понимает, <i>что</i> это: задача, мысль или мечта. Находит даты и время прямо в тексте, выбирает область жизни, ставит в календарь.</p>
+          <h2 class="reveal">Надиктуй — и приложение <span class="grad-text">сделает всё само</span></h2>
+          <p class="reveal">Одна строка — как будто шепнул другу. Хэзэнштейн — это ловец мыслей: напиши или скажи как думаешь — и всё. Больше ничего делать не нужно: дальше всё происходит само.</p>
           <ul class="magic-list reveal" role="list">
             <li><b>«Позвонить маме завтра в 18:00»</b> — задача на завтра, 18:00, в календаре</li>
             <li><b>«Добавь в календарь: Леха должен вернуть 10 000»</b> — чистая задача на нужном дне</li>
             <li><b>«Запомни всегда: двигаться каждый день»</b> — станет правилом, Хэзэнштейн напомнит утром</li>
             <li><b>«Хочу в Японию весной»</b> — желание с обложкой, категорией и планом шагов</li>
+          </ul>
+          <p class="self-sub reveal">А дальше — всё само:</p>
+          <ul class="self-list reveal" role="list">
+            <li>само определит: задача, мысль или мечта</li>
+            <li>само найдёт дату и время в тексте</li>
+            <li>само выберет область жизни</li>
+            <li>само рассортирует по разделам</li>
+            <li>само добавит в тудушку и календарь</li>
+            <li>само напомнит вовремя</li>
           </ul>
           <p class="note-gold reveal">🎤 Удобнее голосом? Зажми большую кнопку и просто говори — отпустишь, всё улетит.</p>
         </div>
@@ -137,6 +146,23 @@
             <img src="assets/shot_todo.webp" width="780" height="1688" alt="Тудушка: задачи с датами появились сами из обычного текста" loading="lazy" decoding="async">
           </figure>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POCKET (всё в одном кармане) ============ -->
+  <section class="section" id="pocket">
+    <div class="container">
+      <span class="chip chip-cyan reveal">Один карман</span>
+      <h2 class="reveal">Всё в одном <span class="grad-text">кармане</span></h2>
+      <p class="section-sub reveal">Шесть инструментов, которые работают как один.</p>
+      <div class="grid-3">
+        <article class="card reveal"><span class="ic ic-violet" aria-hidden="true">🎯</span><h3>Тудушка-очередь</h3><p>Одна задача наверху, остальные ждут; порядок меняется перетаскиванием.</p></article>
+        <article class="card reveal"><span class="ic ic-cyan" aria-hidden="true">📅</span><h3>Календарь</h3><p>Месяц и неделя; «Раскидать» быстро распределит нерассортированные задачи по датам.</p></article>
+        <article class="card reveal"><span class="ic ic-gold" aria-hidden="true">🕘</span><h3>История</h3><p>Поиск, теги, фильтры «сегодня / 7 дней / месяц», выполненное отдельно.</p></article>
+        <article class="card reveal"><span class="ic ic-gold" aria-hidden="true">🌠</span><h3>Желания</h3><p>Большая цель превращается в шаги-задачи с общим тегом.</p></article>
+        <article class="card reveal"><span class="ic ic-violet" aria-hidden="true">🌌</span><h3>Карта мыслей</h3><p>Облако слов и граф-сферы с семантическим зумом.</p></article>
+        <article class="card reveal"><span class="ic ic-cyan" aria-hidden="true">🤖</span><h3>ИИ-чат</h3><p>Помнит все записи и отвечает на вопросы о твоих планах.</p></article>
       </div>
     </div>
   </section>
@@ -179,7 +205,6 @@
           <div class="phone cross-phone" id="crossPhone" role="button" tabindex="0" aria-label="Демо: символ Х зачёркивает задачу в фокусе. Тапни — повторить">
             <img src="assets/shot_main.webp" width="780" height="1688" alt="Главный экран Хэзэнштейна: «Купить беговые кроссовки и экипирование» в фокусе" loading="lazy" decoding="async">
             <canvas id="xGestureCanvas" aria-hidden="true"></canvas>
-            <div class="cross-strike" id="crossStrike" aria-hidden="true"></div>
             <span class="cross-zap" id="crossZap" aria-hidden="true" hidden>⚡</span>
           </div>
           <p class="cross-hint" id="crossHint">👆 Смотри: задача зачёркивается сама — тапни, чтобы повторить</p>
@@ -309,6 +334,60 @@
     </div>
   </section>
 
+  <!-- ============ CLOUD (карта мыслей) ============ -->
+  <section class="section" id="cloud">
+    <div class="container split rev">
+      <div class="split-visual reveal">
+        <figure class="phone">
+          <img src="assets/shot_cloud.webp" width="780" height="1688" alt="Карта мыслей: облако слов из реальных записей" loading="lazy" decoding="async">
+        </figure>
+        <figcaption class="shot-caption">Облако слов из реальных записей</figcaption>
+      </div>
+      <div class="split-copy">
+        <span class="chip chip-cyan reveal">🌌 Карта мыслей</span>
+        <h2 class="reveal">Посмотри на свою голову <span class="grad-text">со стороны</span></h2>
+        <div class="grid-2-cards">
+          <article class="card card-cyan reveal">
+            <h3>Облако слов</h3>
+            <p>Что занимает мысли чаще всего — то и крупнее. Сразу видно, куда уходит внимание.</p>
+          </article>
+          <article class="card card-violet reveal">
+            <h3>Граф-сферы</h3>
+            <p>Записи группируются в сферы жизни; чем сильнее приближаешься — тем больше деталей проявляется (семантический зум, как в Obsidian).</p>
+          </article>
+        </div>
+        <p class="bridge bridge-left reveal">Связи между записями ИИ находит сам — достаточно нажать «Найти связи».</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAT (ИИ-чат) ============ -->
+  <section class="section section-alt" id="chat">
+    <div class="container split">
+      <div class="split-copy">
+        <span class="chip chip-violet reveal">🤖 ИИ-чат</span>
+        <h2 class="reveal">ИИ, который <span class="grad-text">знает твои планы</span></h2>
+        <div class="grid-2-cards">
+          <article class="card card-violet reveal">
+            <h3>Помнит все записи</h3>
+            <p>Спроси «что у меня по планам на неделю» — получишь сводку по заметкам, задачам и желаниям. Никаких ручных отчётов.</p>
+          </article>
+          <article class="card card-cyan reveal">
+            <h3>Итог дня в 22:00</h3>
+            <p>Вечером приложение само подведёт итог: что сделано, сколько потрачено, какое настроение.</p>
+          </article>
+        </div>
+        <p class="bridge bridge-left reveal">Вход анонимный — данные только твои.</p>
+      </div>
+      <div class="split-visual reveal">
+        <figure class="phone">
+          <img src="assets/shot_chat.webp" width="780" height="1688" alt="ИИ-чат: сводка планов по всей базе заметок" loading="lazy" decoding="async">
+        </figure>
+        <figcaption class="shot-caption">Спросил о планах — получил сводку по всей базе</figcaption>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ MORE FEATURES ============ -->
   <section class="section" id="more">
     <div class="container">
@@ -387,28 +466,29 @@
   <p class="footer-copy">© <span id="year">2026</span> Хэзэнштейн · сделано с любовью, вдохновением и заботой о людях</p>
 </footer>
 
-<!-- ============ DECK — десктоп-презентация (1280×720 слайды) ============ -->
+<!-- ============ DECK — десктоп-презентация (зеркало секций страницы) ============ -->
 <div class="deck" id="deck" role="region" aria-label="Презентация Хэзэнштейн">
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_01.html" title="Хэзэнштейн — обложка" scrolling="no" tabindex="-1" loading="eager"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_01.html" title="Хэзэнштейн — главная" scrolling="no" tabindex="-1" loading="eager"></iframe></div></section>
   <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_02.html" title="Хэзэнштейн — знакомо?" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_03.html" title="Хэзэнштейн — одна строка" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_03.html" title="Хэзэнштейн — надиктуй и всё само" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
   <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_04.html" title="Хэзэнштейн — всё в одном кармане" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_05.html" title="Хэзэнштейн — фокус" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_05b.html" title="Хэзэнштейн — кайф зачёркивания" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_06.html" title="Хэзэнштейн — календарь" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_07.html" title="Хэзэнштейн — желания" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_08.html" title="Хэзэнштейн — карта мыслей" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_08b.html" title="Хэзэнштейн — ИИ-чат" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09.html" title="Хэзэнштейн — сравнение" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09b.html" title="Хэзэнштейн — Хэзи растёт от твоих дел" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09c.html" title="Хэзэнштейн — мелочи, которых не хватает другим" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09d.html" title="Хэзэнштейн — как это меняет день" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_10.html" title="Хэзэнштейн — попробуй сейчас" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_05.html" title="Хэзэнштейн — одна задача, ноль шума" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_06.html" title="Хэзэнштейн — кайф зачёркивания" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_07.html" title="Хэзэнштейн — календарь" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_08.html" title="Хэзэнштейн — Хэзи растёт от твоих дел" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09.html" title="Хэзэнштейн — почему Хэзэнштейн, а не…" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_10.html" title="Хэзэнштейн — честное сравнение" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_11.html" title="Хэзэнштейн — мечта получает маршрут" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_12.html" title="Хэзэнштейн — карта мыслей" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_13.html" title="Хэзэнштейн — ИИ-чат" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_14.html" title="Хэзэнштейн — мелочи, которых не хватает другим" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_15.html" title="Хэзэнштейн — как это меняет день" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
+  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_16.html" title="Хэзэнштейн — попробуй сейчас" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
 </div>
 <nav class="deck-dots" aria-label="Навигация по слайдам"></nav>
 <a class="btn btn-primary btn-sm deck-cta" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
 
-<script src="js/deck.js?v=20261014h" defer></script>
-<script src="js/main.js?v=20261014h" defer></script>
+<script src="js/deck.js?v=20261014i" defer></script>
+<script src="js/main.js?v=20261014i" defer></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Хэзэнштейн — Фокус, а не завал</title>
+<title>Хэзэнштейн — Одна задача. Ноль шума.</title>
 <link rel="stylesheet" href="global.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,6 @@
   .rest{color:var(--muted)}
   .accent-line{border-left:3px solid var(--cyan);padding-left:18px}
   .accent-line p{margin:0;font-family:var(--font-heading);font-weight:600;font-size:var(--fs-h3);line-height:1.42}
-  .shadow-top{box-shadow:0 44px 96px rgba(0,0,0,.72),0 0 110px rgba(0,212,255,.13)}
 </style>
 </head>
 <body>
@@ -29,38 +28,39 @@
 
   <div class="relative z-10 h-full flex" style="padding:54px 60px 46px 64px;gap:36px;">
 
-    <!-- LEFT: copy -->
+    <!-- LEFT: copy — как в секции -->
     <div class="flex flex-col" style="width:min(660px,52%);flex:none;">
-      <h1 class="h1"><span class="grad-text">Фокус</span>, а не завал</h1>
-      <p class="sub" style="margin:10px 0 0;">На главном экране всегда ровно одна задача</p>
+      <span class="chip" style="align-self:flex-start">🎯 Против распыления</span>
+      <h1 class="h1" style="margin:14px 0 0;">Одна задача. <span class="grad-text">Ноль шума.</span></h1>
+      <p class="sub" style="margin:14px 0 0;">Мозг не умеет делать десять дел сразу — но обожает переключаться и тревожиться. Поэтому наверху главного экрана живёт <span style="color:var(--primary);font-weight:700">ровно одна задача</span>: самая важная прямо сейчас.</p>
 
-      <div class="flex flex-col" style="gap:21px;margin-top:42px;">
+      <div class="flex flex-col" style="gap:21px;margin-top:36px;">
         <div class="row">
-          <div class="row-icon">👆</div>
-          <p><span class="lead">Тап по карточке</span> <span class="rest">— открыть задачу</span></p>
+          <div class="row-icon">✅</div>
+          <p><span class="lead">«Готово»</span> <span class="rest">— закрыл и получил свои ⚡</span></p>
         </div>
         <div class="row">
           <div class="row-icon">➡️</div>
-          <p><span class="lead">Свайп вправо</span> <span class="rest">— пропустить и перейти к следующей</span></p>
+          <p><span class="lead">«Пропустить»</span> <span class="rest">— честно отложил, очередь сама подвинула следующую</span></p>
         </div>
         <div class="row">
-          <div class="row-icon"><span style="font-family:'DejaVu Sans',sans-serif;font-size:26px;color:var(--primary);">⠿</span></div>
-          <p><span class="lead">В тудушке тянешь карточку</span> <span class="rest">— соседи подвинуваются сами</span></p>
+          <div class="row-icon">❌</div>
+          <p><span class="lead">Жест ✕ на экране</span> <span class="rest">— задача выполнена одним росчерком</span></p>
         </div>
       </div>
 
       <div class="accent-line" style="margin-top:auto;">
-        <p class="cyan-text"><span class="material-icons" aria-hidden="true" style="font-size:20px;vertical-align:-4px;margin-right:8px;">center_focus_strong</span>Очередь вместо кладбища дел: ты видишь то, что нужно сделать сейчас</p>
+        <p class="cyan-text"><span class="material-icons" aria-hidden="true" style="font-size:20px;vertical-align:-4px;margin-right:8px;">center_focus_strong</span>Дела «на потом» ждут в разделе по датам — они не мелькают и не давят. Психология без давления, порядок без нервов</p>
       </div>
     </div>
 
     <!-- RIGHT: two overlapping screenshots -->
     <div class="flex flex-col flex-1 relative">
       <div class="relative flex-1">
-        <img src="../assets/shot_main.webp" alt="Главный экран: карточка фокуса и очередь" class="phone-shot absolute" style="height:min(490px,56vh);width:auto;left:0;top:9vh;display:block;">
-        <img src="../assets/shot_todo_rich.webp" alt="Тудушка: 14 задач с датами" class="phone-shot shadow-top absolute" style="height:min(560px,64vh);width:auto;right:0;top:0;z-index:2;display:block;">
+        <img src="../assets/shot_main.webp" alt="Главный экран: одна задача в фокусе" class="phone-shot absolute" style="height:min(490px,56vh);width:auto;left:0;top:9vh;display:block;">
+        <img src="../assets/shot_todo_rich.webp" alt="Тудушка: дела на потом ждут в разделе по датам" class="phone-shot absolute" style="height:min(560px,64vh);width:auto;right:0;top:0;z-index:2;display:block;box-shadow:0 44px 96px rgba(0,0,0,.72),0 0 110px rgba(0,212,255,.13);">
       </div>
-      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:12px 0 0;line-height:1.6;">Карточка фокуса: +2 в очереди · Тудушка: 14 задач, у каждой дата</p>
+      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:12px 0 0;line-height:1.6;">Ровно одна задача, а не завал из 47</p>
     </div>
 
   </div>

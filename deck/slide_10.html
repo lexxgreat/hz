@@ -2,70 +2,63 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Хэзэнштейн — Как это изменит твою жизнь</title>
+<title>Хэзэнштейн — Честное сравнение по строчкам</title>
 <link rel="stylesheet" href="global.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>html,body{margin:0;padding:0;background:var(--bg)}</style>
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .tbl{width:100%;border-collapse:collapse;font-size:var(--fs-small)}
+  .tbl th,.tbl td{padding:10px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  .tbl thead th{font-family:var(--font-heading);font-weight:700;font-size:var(--fs-body);color:var(--muted);letter-spacing:.03em}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  .tbl td:first-child{color:var(--primary);font-weight:600}
+  .tbl td.no{color:var(--muted);font-weight:400}
+  .tbl .hz{background:linear-gradient(135deg,rgba(108,71,255,0.20),rgba(0,212,255,0.09));border-left:1px solid rgba(108,71,255,0.35);border-right:1px solid rgba(108,71,255,0.35);font-family:var(--font-heading);font-weight:700;color:var(--primary)}
+  .tbl th.hz{border-top:1px solid rgba(108,71,255,0.35);border-radius:14px 14px 0 0;color:var(--primary)}
+  .tbl tr:last-child td.hz{border-bottom:1px solid rgba(108,71,255,0.35);border-radius:0 0 14px 14px}
+</style>
 </head>
 <body>
 <div class="slide">
   <!-- ambient glow -->
-  <div class="orb orb-gold" data-decor aria-hidden="true" style="width:500px;height:500px;right:-170px;top:-210px"></div>
-  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:620px;height:620px;left:-230px;bottom:-260px"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:520px;height:520px;right:-200px;bottom:-240px;opacity:.22"></div>
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:560px;height:560px;left:-220px;top:-250px;opacity:.26"></div>
 
-  <div style="position:relative;z-index:1;display:flex;align-items:center;gap:48px;height:100%;padding:56px 64px">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:50px 64px 42px">
 
-    <!-- left: copy + CTA -->
-    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:30px">
-
-      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.12;letter-spacing:-0.5px">
-        Как это изменит <span class="grad-text">твою жизнь</span>
+    <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.5px;color:var(--primary)">
+        По <span class="grad-text">строчкам</span>
       </h1>
+      <p class="muted" style="margin:0 0 6px;font-size:var(--fs-body);font-weight:500;text-align:right">Те же возможности, что и на сайте — сравнение в один экран</p>
+    </header>
 
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">wb_sunny</span>
-          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
-            <span style="font-family:var(--font-heading);font-weight:800">Утром —</span>
-            <span class="muted"> открываешь и видишь одну задачу дня, а не 47 дел</span>
-          </p>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">event</span>
-          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
-            <span style="font-family:var(--font-heading);font-weight:800">Днём —</span>
-            <span class="muted"> планы сами встают в календарь из одной строки</span>
-          </p>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:24px;line-height:1.3">nights_stay</span>
-          <p style="margin:0;font-size:var(--fs-body);line-height:1.5">
-            <span style="font-family:var(--font-heading);font-weight:800">Вечером в 22:00 —</span>
-            <span class="muted"> приложение подводит итог: что сделано, сколько потрачено, какое настроение</span>
-          </p>
-        </div>
-      </div>
-
-      <div class="card card-accent" style="padding:26px 30px;display:flex;align-items:center;gap:30px">
-        <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
-          <div style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h2);line-height:1.2">Попробуй прямо сейчас</div>
-          <a class="grad-text" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener" style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.5px;text-decoration:none">lexxgreat.github.io/hz3</a>
-          <p class="muted" style="margin:2px 0 0;font-size:var(--fs-small);line-height:1.55">Открывается в браузере · ставится на телефон за 10 секунд · вход анонимный · данные только твои</p>
-        </div>
-        <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px">
-          <img src="../assets/qr_app.svg" alt="QR-код: открыть Хэзэнштейн на телефоне" style="width:168px;height:168px;display:block;border-radius:14px;background:#fff;padding:10px" loading="lazy">
-          <span class="shot-caption">Наведи камеру</span>
-        </div>
-      </div>
-
+    <div style="margin-top:22px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,0.03);padding:6px 10px;flex:1;min-height:0;overflow:hidden">
+      <table class="tbl">
+        <colgroup><col style="width:34%"><col style="width:29%"><col style="width:37%"></colgroup>
+        <thead>
+          <tr>
+            <th>Возможность</th>
+            <th>Обычные приложения</th>
+            <th class="hz"><span class="grad-text">Хэзэнштейн</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Поймать мысль одной строкой</td><td class="no">Всё руками</td><td class="hz">Сам разберёт, что это</td></tr>
+          <tr><td>Даты и время из текста</td><td class="no">Поля и пикеры</td><td class="hz">«Завтра в 18:00», «до пятницы»</td></tr>
+          <tr><td>Фокус дня</td><td class="no">Длинный список</td><td class="hz">Одна задача + жест ✕</td></tr>
+          <tr><td>Радость от выполнения</td><td class="no">Тусклая галочка</td><td class="hz">Зачёркивание, искры, ⚡</td></tr>
+          <tr><td>Живой напарник</td><td class="no">Нет</td><td class="hz">Растёт от твоих дел</td></tr>
+          <tr><td>Желание → план → задачи</td><td class="no">Три приложения</td><td class="hz">Один ввод, всё связалось</td></tr>
+          <tr><td>Наставники по мечте</td><td class="no">Нет</td><td class="hz">Практик, Скептик, Мечтатель, Философ</td></tr>
+          <tr><td>Правила «помнить всегда»</td><td class="no">Нет</td><td class="hz">Тихое утреннее напоминание</td></tr>
+          <tr><td>Карта мыслей</td><td class="no">Нет</td><td class="hz">Облако слов + граф-сферы</td></tr>
+          <tr><td>Итог дня</td><td class="no">Нет</td><td class="hz">В 22:00 само: дела, деньги, настроение</td></tr>
+          <tr><td>Регистрация</td><td class="no">Аккаунт, почта</td><td class="hz">Открыл — и работаешь</td></tr>
+        </tbody>
+      </table>
     </div>
-
-    <!-- right: rotated evening-summary screenshot -->
-    <figure style="margin:0;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:16px">
-      <img src="../assets/shot_summary.webp" alt="Вечерний итог дня" class="phone-shot" style="height:min(555px,64vh);width:auto;display:block;transform:rotate(2.5deg)">
-      <figcaption class="shot-caption">Вечерний итог — как за хороший день</figcaption>
-    </figure>
 
   </div>
 </div>

@@ -126,10 +126,9 @@
   if (!phone) return;
   var canvas = document.getElementById('xGestureCanvas');
   var hint = document.getElementById('crossHint');
-  var strike = document.getElementById('crossStrike');
   var zap = document.getElementById('crossZap');
   var ctx = canvas ? canvas.getContext('2d') : null;
-  if (!canvas || !ctx || !hint || !strike) return;
+  if (!canvas || !ctx || !hint) return;
 
   var strokes = [];        // завершённые штрихи: {points, time, matched}
   var current = null;      // штрих в работе
@@ -235,7 +234,6 @@
 
   function success() {
     phone.classList.add('is-done');
-    strike.classList.add('on');
     if (zap) zap.hidden = false;
     celebrate();
     hint.textContent = '⚡ Вот так это работает. Тапни — повторю';
@@ -244,23 +242,22 @@
 
   function reset() {
     phone.classList.remove('is-done');
-    strike.classList.remove('on');
     if (zap) zap.hidden = true;
     hint.textContent = origHint;
     playing = false;
-    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1500); }
+    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1100); }
   }
 
   function animateStroke(a, b, done) {
     current = { points: [{ x: a.x, y: a.y }], time: Date.now() };
     startFade();
-    var t0 = performance.now(), D = 420;
+    var t0 = performance.now(), D = 330;
     var step = function (t) {
       if (!current) { if (done) done(); return; }
       var k = Math.min(1, (t - t0) / D);
       var p = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
       var last = current.points[current.points.length - 1];
-      if (Math.abs(last.x - p.x) > 2 || Math.abs(last.y - p.y) > 2) current.points.push(p);
+      if (Math.abs(last.x - p.x) > 1.2 || Math.abs(last.y - p.y) > 1.2) current.points.push(p);
       drawAll();
       if (k < 1) { requestAnimationFrame(step); }
       else { strokes.push(current); current = null; if (done) done(); }
@@ -290,7 +287,6 @@
     drawPath([{ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }], '1', 'rgba(0,255,140,ALPHA)', 8);
     drawPath([{ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }], '1', 'rgba(0,255,140,ALPHA)', 8);
     phone.classList.add('is-done');
-    strike.classList.add('on');
     if (zap) zap.hidden = false;
     hint.textContent = '✓ Задача выполнена — так это работает в приложении';
   }
@@ -314,12 +310,12 @@
       clearTimeout(loopTimer);
       if (!visible) return;
       if (reduced) { if (!playedOnce) { playedOnce = true; instantDone(); } return; }
-      loopTimer = setTimeout(playAuto, 600);
+      loopTimer = setTimeout(playAuto, 420);
     }, { threshold: 0.45 });
     io.observe(phone);
   } else {
     visible = true;
-    loopTimer = setTimeout(playAuto, 600);
+    loopTimer = setTimeout(playAuto, 420);
   }
 
   window.addEventListener('resize', sizeCanvas);

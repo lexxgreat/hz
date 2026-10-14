@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — Карта мыслей</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:var(--bg)}</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:540px;height:540px;left:-180px;bottom:-230px"></div>
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:620px;height:620px;right:-230px;top:-250px"></div>
+
+  <div style="position:relative;z-index:1;display:flex;align-items:center;gap:56px;height:100%;padding:56px 64px">
+
+    <!-- left: real screenshot -->
+    <figure style="margin:0;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <img src="../assets/shot_cloud.webp" alt="Карта мыслей — облако слов" class="phone-shot" style="height:min(560px,66vh);width:auto;display:block">
+      <figcaption class="shot-caption">Облако слов из реальных записей</figcaption>
+    </figure>
+
+    <!-- right: copy -->
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:24px">
+      <div><span class="chip" style="font-size:var(--fs-small)">🌌 Карта мыслей</span></div>
+
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.14;letter-spacing:-0.5px">
+        Посмотри на свою голову <span class="grad-text">со стороны</span>
+      </h1>
+
+      <div class="card card-cyan" style="padding:22px 26px;display:flex;gap:16px;align-items:flex-start">
+        <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:28px;line-height:1;margin-top:2px">cloud</span>
+        <div>
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin-bottom:6px">Облако слов</div>
+          <p class="muted" style="margin:0;font-size:var(--fs-body);line-height:1.55">Что занимает мысли чаще всего — то и крупнее. Сразу видно, куда уходит внимание.</p>
+        </div>
+      </div>
+
+      <div class="card card-accent" style="padding:22px 26px;display:flex;gap:16px;align-items:flex-start">
+        <span class="material-icons" aria-hidden="true" style="color:var(--cyan);font-size:28px;line-height:1;margin-top:2px">hub</span>
+        <div>
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin-bottom:6px">Граф-сферы</div>
+          <p class="muted" style="margin:0;font-size:var(--fs-body);line-height:1.55">Записи группируются в сферы жизни; чем сильнее приближаешь — тем больше деталей проявляется (семантический зум, как в Obsidian).</p>
+        </div>
+      </div>
+
+      <p class="muted" style="margin:4px 0 0;font-size:var(--fs-body);display:flex;align-items:center;gap:10px">
+        <span class="material-icons" aria-hidden="true" style="color:var(--accent-2);font-size:20px">auto_awesome</span>
+        <span>Связи между записями ИИ находит сам — достаточно нажать „Найти связи“</span>
+      </p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

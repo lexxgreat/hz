@@ -2,18 +2,17 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Хэзэнштейн — Почему не очередная заметка</title>
+<title>Хэзэнштейн — Почему Хэзэнштейн, а не…</title>
 <link rel="stylesheet" href="global.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
-html,body{margin:0;padding:0;background:var(--bg)}
-.tbl{font-size:var(--fs-small)}
-.tbl td,.tbl th{padding:13px 18px}
-.tbl .hz{background:linear-gradient(135deg,var(--accent-soft),var(--cyan-soft));border-left:1px solid var(--line-accent);border-right:1px solid var(--line-accent);font-family:var(--font-heading);font-weight:700;color:var(--primary)}
-.tbl th.hz{border-top:1px solid var(--line-accent);border-radius:16px 16px 0 0}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tr:last-child td.hz{border-bottom:1px solid var(--line-accent);border-radius:0 0 16px 16px}
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .vs-card{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;display:flex;flex-direction:column}
+  .vs-card h3{font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);margin:0 0 12px;color:var(--primary)}
+  .vs-pain{color:var(--muted);font-size:var(--fs-small);line-height:1.5;margin:0 0 12px}
+  .vs-hazi{font-size:var(--fs-small);line-height:1.55;margin:auto 0 0;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(108,71,255,0.16),rgba(0,212,255,0.08));border:1px solid rgba(108,71,255,0.35);color:var(--primary)}
+  .vs-hazi b{font-family:var(--font-heading)}
 </style>
 </head>
 <body>
@@ -22,62 +21,48 @@ html,body{margin:0;padding:0;background:var(--bg)}
   <div class="orb orb-violet" data-decor aria-hidden="true" style="width:560px;height:560px;right:-210px;top:-240px"></div>
   <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:500px;height:500px;left:-190px;bottom:-220px"></div>
 
-  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:52px 64px 44px">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:52px 64px 46px">
 
-    <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.5px">Почему <span class="grad-text">не очередная</span> заметка</h1>
-    <p class="muted" style="margin:10px 0 0;font-size:var(--fs-body)">Чего нет в обычных приложениях — и что уже работает здесь</p>
+    <header>
+      <span class="chip">🤝 Честное сравнение</span>
+      <h1 style="margin:12px 0 0;font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.5px;color:var(--primary)">
+        Почему Хэзэнштейн, <span class="grad-text">а не…</span>
+      </h1>
+      <p class="muted" style="margin:10px 0 0;font-size:var(--fs-h3);font-weight:500">Мы уважительно относимся к классике — и всё-таки.</p>
+    </header>
 
-    <table class="tbl" style="margin-top:24px">
-      <colgroup><col style="width:38%"><col style="width:31%"><col style="width:31%"></colgroup>
-      <thead>
-        <tr>
-          <th style="font-size:var(--fs-body)">Возможность</th>
-          <th class="muted" style="font-size:var(--fs-body);font-weight:600">Обычные заметки и тудушки</th>
-          <th class="hz" style="font-size:var(--fs-body)"><span class="grad-text">Хэзэнштейн</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="font-weight:600">ИИ разбирает строку: задача это, заметка, дата?</td>
-          <td class="no">Всё руками</td>
-          <td class="hz">Сам, за секунды</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Умные даты из текста</td>
-          <td class="no">Выбери в календаре</td>
-          <td class="hz">„завтра“, „до пятницы“ понимаются сами</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Фокус дня на главном экране</td>
-          <td class="no">Длинный список</td>
-          <td class="hz">Одна задача, свайп — следующая</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Желание превращается в задачи</td>
-          <td class="no">Отдельное приложение</td>
-          <td class="hz">План + тег + тудушка</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Карта мыслей и сферы жизни</td>
-          <td class="no">Нет</td>
-          <td class="hz">Облако + граф с зумом</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Итог дня в 22:00</td>
-          <td class="no">Нет</td>
-          <td class="hz">Сделано, деньги, настроение</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600">Установка</td>
-          <td class="no">Стор + аккаунты</td>
-          <td class="hz">PWA: браузер, офлайн, анонимно</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- four vs-cards — те же, что в секции -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:30px;flex:1;min-height:0;align-items:stretch">
 
-    <p class="gold-text" style="margin:auto 0 0;text-align:center;font-family:var(--font-heading);font-weight:700;font-size:var(--fs-body);display:flex;align-items:center;justify-content:center;gap:10px">
-      <span class="material-icons" aria-hidden="true" style="font-size:20px;color:var(--gold)">auto_awesome</span>
-      Это личное приложение одного человека — поэтому в нём нет ничего лишнего
+      <div class="vs-card">
+        <h3>📅 Календарь из телефона</h3>
+        <p class="vs-pain">Форма на 5 полей, чтобы записать «позвонить маме». Мысли до него не доживают.</p>
+        <p class="vs-hazi"><b>Хэзэнштейн:</b> «позвонить маме завтра в 18:00» — уже задача в календаре. Даты находит в тексте сам.</p>
+      </div>
+
+      <div class="vs-card">
+        <h3>✅ Таск-менеджер</h3>
+        <p class="vs-pain">47 дел одним списком, ручная сортировка и вечно невыключенный «входящий».</p>
+        <p class="vs-hazi"><b>Хэзэнштейн:</b> одна задача в фокусе, умная очередь, кайф зачёркивания и живой мотиватор рядом.</p>
+      </div>
+
+      <div class="vs-card">
+        <h3>📝 Заметки</h3>
+        <p class="vs-pain">Всё хранят, ничего не делают. Поиск выдаёт 200 результатов по слову «идея».</p>
+        <p class="vs-hazi"><b>Хэзэнштейн:</b> мысль становится задачей или правилом, а облако слов показывает, чем живёт твоя голова.</p>
+      </div>
+
+      <div class="vs-card">
+        <h3>🌠 Доска желаний</h3>
+        <p class="vs-pain">Вдохновляет до момента «ну и что дальше?».</p>
+        <p class="vs-hazi"><b>Хэзэнштейн:</b> желание получает обложку, категорию, план шагов и ИИ-наставников — и шаги уже в тудушке.</p>
+      </div>
+
+    </div>
+
+    <p style="margin:26px 0 0;text-align:center;color:var(--muted);font-size:var(--fs-body);display:flex;align-items:center;justify-content:center;gap:8px">
+      <span class="material-icons" aria-hidden="true" style="font-size:18px;color:var(--cyan)">arrow_forward</span>
+      Дальше — по строчкам: что в обычных приложениях, что здесь
     </p>
 
   </div>

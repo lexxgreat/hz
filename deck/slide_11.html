@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хэзэнштейн — Мечта получает маршрут</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .h1{font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-.5px;color:var(--primary);margin:0}
+  .sub{font-family:var(--font-body);font-weight:400;font-size:var(--fs-h3);line-height:1.5;color:var(--muted);margin:14px 0 0;max-width:600px}
+  .row{display:flex;align-items:flex-start;gap:16px}
+  .row-icon{width:48px;height:48px;border-radius:14px;background:var(--bg-card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;font-family:'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji','DejaVu Sans',sans-serif}
+  .row p{font-size:var(--fs-h3);line-height:1.4;margin:0}
+  .lead{font-family:var(--font-heading);font-weight:700;color:var(--primary)}
+  .rest{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-gold" data-decor aria-hidden="true" style="width:480px;height:480px;right:-170px;top:-180px;opacity:.22"></div>
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:480px;height:480px;left:-150px;bottom:-160px;opacity:.26"></div>
+
+  <div class="relative z-10 h-full flex" style="padding:52px 60px 46px 64px;gap:38px;">
+
+    <!-- LEFT: copy — как в секции -->
+    <div class="flex flex-col" style="width:min(640px,52%);flex:none;">
+      <span class="chip" style="align-self:flex-start;border-color:rgba(255,209,102,0.45);background:rgba(255,209,102,0.10);color:var(--gold)">Желания</span>
+      <h1 class="h1" style="margin-top:14px;">Мечта получает <span class="grad-text">маршрут</span></h1>
+      <p class="sub">«Поездка в Японию весной» — через несколько секунд у мечты появляется карточка: обложка, нарисованная ИИ, категория и честный план из шагов. Шаги сразу становятся задачами с общим тегом — мечта начинает жить в твоём расписании.</p>
+
+      <div class="flex flex-col" style="gap:21px;margin-top:34px;">
+        <div class="row">
+          <div class="row-icon">Σ</div>
+          <p><span class="lead">Копилка желания:</span> <span class="rest">оценка стоимости, чтобы копить осознанно</span></p>
+        </div>
+        <div class="row">
+          <div class="row-icon">💬</div>
+          <p><span class="lead">Четыре наставника:</span> <span class="rest">Практик даст план, Скептик найдёт слабое место, Мечтатель вернёт огонь, Философ посмотрит со стороны</span></p>
+        </div>
+        <div class="row">
+          <div class="row-icon">📊</div>
+          <p><span class="lead">Прогресс 0/5:</span> <span class="rest">видно, что движется, а что ждёт</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: real screenshot -->
+    <div class="flex-1 flex flex-col items-center justify-center relative">
+      <img src="../assets/shot_wishes.webp" alt="Желание с ИИ-обложкой: сакура, шаги, копилка" class="phone-shot" style="height:min(560px,66vh);width:auto;display:block;">
+      <p class="shot-caption" style="color:var(--muted);text-align:center;margin-top:14px;">Обложку, шаги и категорию собрал ИИ — из одной строки</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

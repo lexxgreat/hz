@@ -290,25 +290,14 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
 .hero-chips .c-gold { border-color: rgba(255, 209, 102, 0.4); color: var(--gold); }
 .hero-chips .c-cyan { border-color: rgba(0, 212, 255, 0.4); color: var(--cyan-soft); }
 
-.hero-visual { position: relative; height: clamp(480px, 56vw, 700px); }
+.hero-visual { position: relative; display: flex; justify-content: center; align-items: flex-start; }
 
-.hero-phone-back {
-  position: absolute;
-  width: min(275px, 56%);
-  right: 0;
-  top: 8%;
-  transform: rotate(7deg);
-  opacity: 0.9;
-  z-index: 1;
-}
-
-.hero-phone-main {
-  position: absolute;
-  width: min(320px, 64%);
-  left: 4%;
-  top: 0;
-  transform: rotate(-4deg);
-  z-index: 2;
+/* Один скриншот по центру правой колонки: раньше .hero-phone не имел правил,
+   картинка растягивалась на всю колонку и обрезалась — на широких экранах выглядело сломанным */
+.hero-phone {
+  width: min(320px, 78%);
+  margin: 0 auto;
+  transform: rotate(-2deg);
 }
 
 /* ---------- Телефон-кадры ---------- */
@@ -411,6 +400,77 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
 
 .note-gold { color: var(--gold); font-size: 0.92rem; margin-top: 6px; }
 .note-muted { color: var(--muted); font-size: 0.92rem; margin-top: 10px; }
+
+/* ---------- Ловец мыслей: примеры и парад «само» ---------- */
+
+.magic-list { list-style: none; display: grid; gap: 12px; margin: 0 0 20px; }
+
+.magic-list li {
+  position: relative;
+  padding: 13px 16px 13px 46px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.magic-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 16px;
+  top: 13px;
+  color: var(--cyan);
+  font-size: 1.05rem;
+}
+
+.magic-list b { color: var(--text); }
+
+/* «…и всё само»: короткие пункты-чипы */
+.self-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+
+.self-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 14px;
+  border: 1px solid rgba(108, 71, 255, 0.35);
+  border-radius: 12px;
+  background: rgba(108, 71, 255, 0.10);
+  color: var(--text);
+  font: 600 0.9rem/1.4 var(--font-head);
+}
+
+.self-list li::before {
+  content: "✓";
+  flex: none;
+  color: var(--cyan-soft);
+  font-weight: 800;
+}
+
+.self-sub {
+  color: var(--muted);
+  font: 700 1rem var(--font-head);
+  margin: 4px 0 12px;
+}
+
+@media (max-width: 960px) {
+  .self-list { grid-template-columns: 1fr; }
+}
+
+/* Две карточки рядом внутри сплит-копии (карта мыслей / ИИ-чат) */
+.grid-2-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+
+@media (max-width: 960px) {
+  .grid-2-cards { grid-template-columns: 1fr; }
+}
 
 /* ---------- Фейковый ввод ---------- */
 
@@ -638,36 +698,7 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   z-index: 50;
 }
 
-/* штрих по задаче в фокусе (позиция под кадр v100: заголовок задачи ≈ 13.5–17.5% высоты) */
-.cross-strike {
-  position: absolute;
-  left: 19%;
-  right: 11%;
-  top: 15%;
-  height: 0;
-  pointer-events: none;
-  z-index: 40;
-}
-
-.cross-strike::before,
-.cross-strike::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -2px;
-  height: 4px;
-  border-radius: 4px;
-  background: var(--grad);
-  box-shadow: 0 0 14px rgba(108, 71, 255, 0.65);
-  transform: rotate(8deg) scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform 0.4s cubic-bezier(0.6, 0, 0.3, 1);
-}
-
-.cross-strike::after { transform: rotate(-8deg) scaleX(0); transition-delay: 0.2s; }
-.is-done .cross-strike::before { transform: rotate(8deg) scaleX(1); }
-.is-done .cross-strike::after { transform: rotate(-8deg) scaleX(1); }
+/* штрих по задаче больше не рисуем: зачёркивание = только жест Х с экрана, как в приложении */
 
 .cross-zap {
   position: absolute;
@@ -833,9 +864,9 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   .nav-mobile .btn { margin-top: 10px; }
 
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-  .hero-visual { height: auto; padding: 24px 0 0; }
-  .hero-phone-back { display: none; }
-  .hero-phone-main { position: relative; left: 0; width: min(320px, 74vw); margin: 0 auto; }
+  .hero-visual { padding-top: 20px; }
+  .hero-phone { width: min(300px, 74vw); }
+  .hero-hazi { top: -16px; right: 4%; width: 76px; opacity: 0.85; }
 
   .split { grid-template-columns: 1fr; }
   .split.rev .split-copy { order: 1; }
@@ -864,7 +895,7 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
   .reveal { opacity: 1; transform: none; transition: none; }
   .caret { animation: none; }
   .btn, .card { transition: none; }
-  .cross-strike::before, .cross-strike::after, .cross-zap, .celebrate-check, .celebrate-particle { transition: none; animation: none; }
+  .cross-zap, .celebrate-check, .celebrate-particle { transition: none; animation: none; }
 }
 
 /* ============================================================
@@ -967,10 +998,10 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
 .hero-hazi {
   position: absolute;
   top: -34px;
-  right: 4%;
+  right: calc(50% - 170px);
   width: clamp(84px, 9vw, 120px);
   height: auto;
-  z-index: 2;
+  z-index: 3;
   opacity: 0.95;
   filter: drop-shadow(0 0 26px rgba(108, 71, 255, 0.5));
   animation: haziFloat 6s ease-in-out infinite;
