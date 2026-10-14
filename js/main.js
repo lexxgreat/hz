@@ -120,8 +120,7 @@
   }
 })();
 
-
-/* ---- Демо «Кайф зачёркивания»: живой скриншот главного экрана + жест Х, порт из приложения ---- */
+/* ---- Демо «Кайф зачёркивания»: просто демо — жест Х проигрывается сам по кругу, скролл страницы не блокируется ---- */
 (function () {
   var phone = document.getElementById('crossPhone');
   if (!phone) return;
@@ -132,13 +131,19 @@
   var ctx = canvas ? canvas.getContext('2d') : null;
   if (!canvas || !ctx || !hint || !strike) return;
 
-  var strokes = [];        // завершённые штрихи: {points, type, time, matched}
+  var strokes = [];        // завершённые штрихи: {points, time, matched}
   var current = null;      // штрих в работе
   var fadeRunning = false;
   var drawScheduled = false;
   var resetTimer = null;
-  var downAt = 0;
+  var loopTimer = null;
+  var playing = false;
+  var visible = false;
+  var reduced = false;
+  var playedOnce = false;
   var origHint = hint.textContent;
+
+  try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   function sizeCanvas() {
     var r = canvas.getBoundingClientRect();
@@ -233,8 +238,8 @@
     strike.classList.add('on');
     if (zap) zap.hidden = false;
     celebrate();
-    hint.textContent = '✓ Задача выполнена — искры, ⚡ и кайф. Ещё раз?';
-    resetTimer = setTimeout(reset, 3600);
+    hint.textContent = '⚡ Вот так это работает. Тапни — повторю';
+    resetTimer = setTimeout(reset, 2600);
   }
 
   function reset() {
@@ -242,101 +247,14 @@
     strike.classList.remove('on');
     if (zap) zap.hidden = true;
     hint.textContent = origHint;
-  }
-
-  function pt(e) {
-    var r = canvas.getBoundingClientRect();
-    return { x: e.clientX - r.left, y: e.clientY - r.top };
-  }
-
-  phone.addEventListener('pointerdown', function (e) {
-    if (current || phone.classList.contains('is-done')) return;
-    e.preventDefault();
-    if (phone.setPointerCapture) { try { phone.setPointerCapture(e.pointerId); } catch (err) {} }
-    sizeCanvas();
-    current = { points: [pt(e)], time: 0 };
-    downAt = Date.now();
-    startFade();
-  });
-
-  phone.addEventListener('pointermove', function (e) {
-    if (!current) return;
-    var p = pt(e);
-    var last = current.points[current.points.length - 1];
-    if (Math.abs(last.x - p.x) < 2 && Math.abs(last.y - p.y) < 2) return;
-    current.points.push(p);
-    scheduleDraw();
-  });
-
-  phone.addEventListener('pointerup', function (e) {
-    if (!current) return;
-    gestureEnd(pt(e));
-  });
-
-  phone.addEventListener('pointercancel', function () {
-    if (!current) return;
-    strokes.push(current); current = null; startFade();
-  });
-
-  function gestureEnd(p) {
-    var pts = current.points;
-    var last = pts[pts.length - 1];
-    if (Math.abs(last.x - p.x) > 2 || Math.abs(last.y - p.y) > 2) pts.push(p);
-    current.time = Date.now();
-    var start = pts[0], end = pts[pts.length - 1];
-    var dx = end.x - start.x, dy = end.y - start.y;
-    var dist = Math.sqrt(dx * dx + dy * dy);
-    var r = canvas.getBoundingClientRect();
-    var minSide = Math.min(r.width, r.height);
-
-    // тап почти без движения — сами показываем жест
-    if (dist < 14 && Date.now() - downAt < 400) { current = null; playAuto(); return; }
-
-    var saveAndFade = function () { strokes.push(current); current = null; startFade(); };
-    if (dist < minSide * 0.5) { saveAndFade(); return; }
-    var ratio = Math.abs(dx) / (Math.abs(dy) || 1);
-    if (ratio < 0.4 || ratio > 2.5) { saveAndFade(); return; }
-
-    var type = (dx * dy > 0) ? 'backslash' : 'slash';
-    var midX = (start.x + end.x) / 2, midY = (start.y + end.y) / 2;
-    var now = Date.now();
-    current.type = type;
-    strokes.push(current);
-    current = null;
-    strokes = strokes.filter(function (s) { return now - s.time < 1200; });
-    var tol = minSide * 0.4;
-    var match = null;
-    for (var i = 0; i < strokes.length; i++) {
-      var s = strokes[i];
-      if (s.type && s.type !== type) {
-        var mx = (s.points[0].x + s.points[s.points.length - 1].x) / 2;
-        var my = (s.points[0].y + s.points[s.points.length - 1].y) / 2;
-        if (Math.abs(mx - midX) < tol && Math.abs(my - midY) < tol) { match = s; break; }
-      }
-    }
-    if (match) {
-      match.matched = true; match.time = now;
-      var ls = strokes[strokes.length - 1];
-      if (ls) { ls.matched = true; ls.time = now; }
-      success();
-    }
-    startFade();
-  }
-
-  // тап = автопоказ: два штриха Х по экрану, как будто провёл пальцем
-  function playAuto() {
-    if (phone.classList.contains('is-done') || current) return;
-    var r = canvas.getBoundingClientRect();
-    var w = r.width, h = r.height;
-    animateStroke({ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }, function () {
-      animateStroke({ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }, function () {});
-    });
+    playing = false;
+    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1500); }
   }
 
   function animateStroke(a, b, done) {
-    var t0 = performance.now(), D = 420;
-    current = { points: [{ x: a.x, y: a.y }], time: 0 };
+    current = { points: [{ x: a.x, y: a.y }], time: Date.now() };
     startFade();
+    var t0 = performance.now(), D = 420;
     var step = function (t) {
       if (!current) { if (done) done(); return; }
       var k = Math.min(1, (t - t0) / D);
@@ -345,14 +263,65 @@
       if (Math.abs(last.x - p.x) > 2 || Math.abs(last.y - p.y) > 2) current.points.push(p);
       drawAll();
       if (k < 1) { requestAnimationFrame(step); }
-      else { var cb = done; gestureEnd(b); if (cb) cb(); }
+      else { strokes.push(current); current = null; if (done) done(); }
     };
     requestAnimationFrame(step);
   }
 
-  phone.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playAuto(); }
+  // автопоказ: два штриха Х по экрану (как в приложении), затем зелёная вспышка + празднование
+  function playAuto() {
+    if (playing || !visible) return;
+    playing = true;
+    var r = canvas.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    animateStroke({ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }, function () {
+      animateStroke({ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }, function () {
+        strokes.forEach(function (s) { s.matched = true; s.time = Date.now(); });
+        success();
+      });
+    });
+  }
+
+  // reduced-motion: статичный результат без анимаций и без цикла
+  function instantDone() {
+    sizeCanvas();
+    var r = canvas.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    drawPath([{ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }], '1', 'rgba(0,255,140,ALPHA)', 8);
+    drawPath([{ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }], '1', 'rgba(0,255,140,ALPHA)', 8);
+    phone.classList.add('is-done');
+    strike.classList.add('on');
+    if (zap) zap.hidden = false;
+    hint.textContent = '✓ Задача выполнена — так это работает в приложении';
+  }
+
+  // тап = повтор (скролл никогда не блокируем: ни preventDefault, ни touch-action:none)
+  phone.addEventListener('click', function () {
+    if (playing) return;
+    clearTimeout(resetTimer);
+    clearTimeout(loopTimer);
+    if (reduced) { instantDone(); return; }
+    playAuto();
   });
+  phone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!playing) playAuto(); }
+  });
+
+  // автодемо, когда блок попадает в зону видимости; ушёл из вида — цикл останавливается
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      clearTimeout(loopTimer);
+      if (!visible) return;
+      if (reduced) { if (!playedOnce) { playedOnce = true; instantDone(); } return; }
+      loopTimer = setTimeout(playAuto, 600);
+    }, { threshold: 0.45 });
+    io.observe(phone);
+  } else {
+    visible = true;
+    loopTimer = setTimeout(playAuto, 600);
+  }
+
   window.addEventListener('resize', sizeCanvas);
   sizeCanvas();
 })();

@@ -619,8 +619,7 @@ h3 { font: 700 clamp(1.15rem, 2vw, 1.4rem)/1.3 var(--font-head); margin-bottom: 
 .cross-phone {
   position: relative;
   width: min(330px, 100%);
-  touch-action: none;
-  cursor: crosshair;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
