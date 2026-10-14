@@ -3,48 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Хэзэнштейн — заметки, задачи и желания с ИИ</title>
-<meta name="description" content="Одна строка — и ИИ разложит всё сам: заметки, задачи, календарь, желания с наставниками и карта мыслей. Тёмное PWA-приложение, работает офлайн, вход анонимный.">
+<title>Хэзэнштейн — ловец мыслей, который живёт в твоём телефоне</title>
+<meta name="description" content="Одна строка — и ИИ разложит всё сам: задачи, даты, желания с планами. Живой напарник Хэзи растёт от твоих дел. Кайф зачёркивания, фокус на одной задаче, итог дня.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta property="og:title" content="Хэзэнштейн — одна строка, и ИИ разложит всё сам">
-<meta property="og:description" content="Заметки, задачи, календарь, желания с ИИ-наставниками и карта мыслей — в одном тёмном приложении.">
+<meta property="og:title" content="Хэзэнштейн — мысль прилетела, Хэзи её поймает">
+<meta property="og:description" content="Одно место для мыслей, дел и мечтаний. Напиши как думаешь — остальное сделает ИИ.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lexxgreat.github.io/hz/">
 <meta property="og:image" content="https://lexxgreat.github.io/hz/assets/shot_main.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="nav">
+<div class="progress-line" id="progressLine" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="orbs" aria-hidden="true"><i class="orb orb-1"></i><i class="orb orb-2"></i><i class="orb orb-3"></i></div>
+
+<header class="nav" id="nav">
   <div class="container nav-inner">
     <a class="brand" href="#top" aria-label="Хэзэнштейн — к началу">
       <span class="brand-mark" aria-hidden="true">ХЗ</span>
       <span class="brand-name">Хэзэнштейн</span>
     </a>
-    <nav class="nav-links" aria-label="Разделы страницы">
-      <a href="#features">Возможности</a>
-      <a href="#wishes">Желания</a>
-      <a href="#todo">Задачи</a>
-      <a href="#calendar">Календарь</a>
-      <a href="#mind">Мысли</a>
-      <a href="#compare">Сравнение</a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="#magic">Мысли</a>
+      <a href="#focus">Фокус</a>
+      <a href="#hazi">Хэзи</a>
+      <a href="#vs">Почему мы</a>
+      <a href="#more">Фишки</a>
     </nav>
-    <a class="btn btn-primary btn-sm nav-cta" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
-    <button class="nav-burger" id="navBurger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMobile">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="btn btn-primary btn-sm nav-cta" href="#get">Открыть Хэзи</a>
+    <button class="nav-burger" id="navBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="#features">Возможности</a>
-    <a href="#wishes">Желания</a>
-    <a href="#todo">Задачи</a>
-    <a href="#calendar">Календарь</a>
-    <a href="#mind">Мысли</a>
-    <a href="#compare">Сравнение</a>
-    <a class="btn btn-primary" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
+    <a href="#magic">Мысли</a>
+    <a href="#focus">Фокус</a>
+    <a href="#hazi">Хэзи</a>
+    <a href="#vs">Почему мы</a>
+    <a href="#more">Фишки</a>
+    <a class="btn btn-primary" href="#get">Открыть Хэзи</a>
   </div>
 </header>
 
@@ -54,347 +54,304 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="chip reveal">Личное приложение · PWA · работает офлайн</span>
-        <h1 class="hero-title reveal">Одна строка —<br>и <span class="grad-text">ИИ разложит всё сам</span></h1>
-        <p class="hero-sub reveal">Хэзэнштейн — место, где мысли превращаются в порядок: заметки, задачи, календарь, желания и карта твоих мыслей. Пиши как думаешь — остальное сделает ИИ.</p>
+        <span class="chip reveal">Сделано с любовью · вход без регистрации</span>
+        <h1 class="hero-title reveal">Мысль прилетела —<br><span class="grad-text">Хэзи её поймает</span></h1>
+        <p class="hero-sub reveal">Хэзэнштейн — одно место для мыслей, дел и мечтаний. Напиши как думаешь — ИИ разложит всё сам: задачи, даты, желания. А живой напарник Хэзи будет расти вместе с тобой.</p>
         <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
-          <a class="btn btn-ghost" href="#features">Смотреть возможности</a>
+          <a class="btn btn-primary btn-lg" href="#get">Открыть Хэзи <span class="btn-arrow">→</span></a>
+          <a class="btn btn-ghost" href="#magic">Как это работает</a>
         </div>
         <ul class="hero-chips reveal" role="list">
-          <li>Умный ввод</li>
-          <li class="c-gold">Желания с ИИ</li>
-          <li class="c-cyan">Без регистрации</li>
+          <li>⭐ Ловит мысли</li>
+          <li>🎯 Одна задача в фокусе</li>
+          <li>✨ Кайф зачёркивания</li>
         </ul>
       </div>
-      <div class="hero-visual">
-        <figure class="phone hero-phone-back reveal">
-          <img src="assets/shot_wishes.webp" width="780" height="1688" alt="Экран желаний: карточка мечты с ИИ-иконкой и прогрессом" loading="eager" decoding="async">
-        </figure>
-        <figure class="phone hero-phone-main reveal">
-          <img src="assets/shot_main.webp" width="780" height="1688" alt="Главный экран: ИИ разложил заметки по типам и умным датам" loading="eager" decoding="async">
+      <div class="hero-visual reveal">
+        <div class="hero-hazi" aria-hidden="true">HAZI_SVG_3</div>
+        <figure class="phone hero-phone" id="heroPhone">
+          <img src="assets/shot_main.webp" width="780" height="1688" alt="Главный экран: одна задача в фокусе, поле ввода мысли, желания" loading="eager" decoding="async">
+          <span class="float-badge fb-1">+5 ⚡</span>
+          <span class="float-badge fb-2">✓ выполнено</span>
+          <span class="float-badge fb-3">🔥 3 дня подряд</span>
         </figure>
       </div>
     </div>
+    <a class="scroll-hint reveal" href="#problem" aria-label="Листай вниз"><span></span></a>
   </section>
 
   <!-- ============ PROBLEM ============ -->
   <section class="section" id="problem">
     <div class="container">
-      <h2 class="reveal">Знакомо? Твоя голова — <span class="grad-text">не файлохранилище</span></h2>
-      <p class="section-sub reveal">Мысли, дела и мечты живут в разных местах — и поэтому теряются.</p>
-      <div class="grid-3">
+      <span class="chip chip-rose reveal">Знакомо?</span>
+      <h2 class="reveal">В телефоне 10 приложений,<br>а порядок — <span class="grad-text">всё равно в голове</span></h2>
+      <p class="section-sub reveal">Календарь знает про встречи, но не про мечты. Заметки помнят всё, но молчат. Таск-менеджер гонит список из 47 дел. Мысли разбегаются между ними — и теряются.</p>
+      <div class="grid-4">
         <article class="card reveal">
-          <h3>Мысли в разных местах</h3>
-          <p>Заметки в одном приложении, задачи в другом, планы вообще в голове. К вечеру половина забывается, а вечером приходит идея — и записать её уже негде.</p>
-        </article>
-        <article class="card reveal">
-          <h3>Списки-кладбища</h3>
-          <p>В обычных тудушках дела копятся десятками: нет приоритета, взгляд разбегается, хочется закрыть и забыть. Сделанное тонет в несделанном.</p>
-        </article>
-        <article class="card reveal">
-          <h3>Мечты без планов</h3>
-          <p>Желания живут годами, потому что непонятно, с чего начать. Мечта так и остаётся строчкой, до которой руки никогда не доходят.</p>
-        </article>
-      </div>
-      <p class="bridge reveal">Хэзэнштейн собран ровно под это: <b>одна строка ввода</b> — и ИИ раскладывает всё по местам.</p>
-    </div>
-  </section>
-
-  <!-- ============ MAGIC INPUT ============ -->
-  <section class="section section-alt" id="magic">
-    <div class="container split">
-      <div class="split-copy">
-        <span class="chip chip-violet reveal">Главная фишка</span>
-        <h2 class="reveal">Написал строку — <span class="grad-text">и всё само</span></h2>
-        <div class="fake-input reveal" aria-hidden="true">
-          <span>Позвонить маме завтра в 18:00</span><span class="caret"></span>
-        </div>
-        <ol class="steps reveal">
-          <li>Понял, что это задача, а не заметка</li>
-          <li>Поставил её в очередь тудушки</li>
-          <li>Расшифровал «завтра в 18:00» → 16 сентября, 18:00</li>
-          <li>Отметил в календаре на нужном дне</li>
-        </ol>
-        <p class="note-gold reveal">Работает и с голоса: зажми микрофон и просто говори.</p>
-      </div>
-      <div class="split-visual reveal">
-        <figure class="phone">
-          <img src="assets/shot_todo.webp" width="780" height="1688" alt="Тудушка: ИИ сам поставил умные даты из обычного текста" loading="lazy" decoding="async">
-        </figure>
-        <figcaption class="shot-caption">ИИ сам поставил даты: «до пятницы» → 18 сент., «в субботу» → 19 сент., «завтра в 18:00» → 16 сент.</figcaption>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FEATURES ============ -->
-  <section class="section" id="features">
-    <div class="container">
-      <h2 class="reveal">Всё в одном кармане</h2>
-      <p class="section-sub reveal">Шесть инструментов, которые работают как один.</p>
-      <div class="grid-3">
-        <article class="card reveal">
-          <span class="ic ic-violet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span>
-          <h3>Тудушка-очередь</h3>
-          <p>Одна задача наверху, остальные ждут. Порядок меняется перетаскиванием — соседи подвинуваются сами.</p>
-        </article>
-        <article class="card reveal">
-          <span class="ic ic-cyan" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span>
+          <span class="ic ic-cyan" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span>
           <h3>Календарь</h3>
-          <p>Месяц и неделя. Задачи раскидываются перетаскиванием или конвейером «Раскидать» — по дням за один тап.</p>
+          <p>Строго про время. Но мысль «позвонить маме» сам не запишет — надо строить форму, выбирать день, вводить название. Поэтому мысли до него не доезжают.</p>
         </article>
         <article class="card reveal">
-          <span class="ic ic-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-          <h3>История</h3>
-          <p>Поиск, теги, фильтры «сегодня / 7 дней / месяц». Выполненное — отдельно. Ничего не теряется никогда.</p>
+          <span class="ic ic-violet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <h3>Таск-менеджер</h3>
+          <p>Списки-кладбища: дела копятся десятками, взгляд разбегается, мотивация гаснет. И ни капли радости от галочки — только чувство долга.</p>
         </article>
         <article class="card reveal">
-          <span class="ic ic-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.3.8-4.6 4.3 1.2 6.1L12 16.9 6.4 19.8l1.2-6.1L3 9.4l6.3-.8z"/></svg></span>
-          <h3>Желания</h3>
-          <p>Большая цель превращается в шаги-задачи с общим тегом. У каждого желания — свой чат с ИИ-наставниками.</p>
+          <span class="ic ic-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+          <h3>Заметки</h3>
+          <p>Сотни строк, в которых ничего не найти. Записал и забыл — напомнить о заметке заметка не умеет, в дело превратить не может.</p>
         </article>
         <article class="card reveal">
-          <span class="ic ic-cyan" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="10" cy="18" r="2.5"/><path d="M8.2 7.1l7.4 0.7M7 8.3l2.2 7.4M16.6 10l-5 6.2"/></svg></span>
-          <h3>Карта мыслей</h3>
-          <p>Облако слов и граф-сферы с семантическим зумом. Связи между записями ИИ находит сам.</p>
-        </article>
-        <article class="card reveal">
-          <span class="ic ic-violet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H5.5L3 22V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M8.5 11.5h.01M12.5 11.5h.01M16.5 11.5h.01"/></svg></span>
-          <h3>ИИ-чат</h3>
-          <p>Помнит все записи и отвечает на вопросы о твоих планах: «что у меня на неделю?» — и получишь сводку.</p>
+          <span class="ic ic-rose" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z"/></svg></span>
+          <h3>Карта желаний</h3>
+          <p>Красивые картинки без плана. Мечта так и остаётся мечтой — непонятно, с какого шага начать и когда её ждать.</p>
         </article>
       </div>
-      <p class="bridge reveal">Плюс: итог дня в 22:00 · облако слов · напоминания · PWA на телефон без стор и аккаунтов.</p>
+      <p class="bridge reveal">Хэзэнштейн собран ровно для этого: <b>одно поле ввода</b>, которое понимает и мысль, и дело, и мечту — <b>и живой напарник</b>, который делает это приятным.</p>
     </div>
   </section>
 
-  <!-- ============ WISHES (главный раздел) ============ -->
-  <section class="section wishes" id="wishes">
-    <div class="container">
-      <div class="wishes-panel">
-        <div class="section-head">
-          <span class="chip chip-gold reveal">Желания</span>
-          <h2 class="reveal">Желания, у которых <span class="grad-text">есть план</span></h2>
-          <p class="section-sub reveal">Отдельный экран для того, что действительно хочется. Здесь желание — не строчка в списке, а маршрут: иконка, категория, шаги и наставники.</p>
-        </div>
-
-        <div class="split wish-block">
-          <div class="split-copy">
-            <span class="step-num" aria-hidden="true">1</span>
-            <h3>Одна строка → полная карточка</h3>
-            <p>Пишешь «съездить в Карелию» — а ИИ уже собрал карточку мечты: подобрал иконку и категорию, придумал тег, написал промпт для обложки и разложил путь на четыре майлстоуна. Тебе остаётся нажать «Сохранить».</p>
-          </div>
-          <div class="split-visual reveal">
-            <figure class="phone">
-              <img src="assets/shot_wishform.webp" width="780" height="1688" alt="ИИ сам заполнил форму желания: иконка, категория, тег и четыре майлстоуна" loading="lazy" decoding="async">
-            </figure>
-            <figcaption class="shot-caption">Форма желания через 5 секунд после ввода одной строки</figcaption>
-          </div>
-        </div>
-
-        <div class="split rev wish-block">
-          <div class="split-copy">
-            <span class="step-num" aria-hidden="true">2</span>
-            <h3>Прогресс вместо вороньего списка</h3>
-            <p>Каждое желание — карточка с обложкой, категорией и прогрессом шагов. Открыл список — сразу видно, что движется, а что стоит. Иконки для карточек ИИ рисует и подбирает сам.</p>
-          </div>
-          <div class="split-visual reveal">
-            <figure class="phone">
-              <img src="assets/shot_wishes.webp" width="780" height="1688" alt="Список желаний: карточка с ИИ-иконкой и прогрессом шагов" loading="lazy" decoding="async">
-            </figure>
-            <figcaption class="shot-caption">Карточка с ИИ-иконкой и прогрессом 0/5</figcaption>
-          </div>
-        </div>
-
-        <div class="split wish-block">
-          <div class="split-copy">
-            <span class="step-num" aria-hidden="true">3</span>
-            <h3>Чат с наставниками по каждой мечте</h3>
-            <p>У каждого желания есть свой чат с четырьмя наставниками: <b>Практик</b> даст план, <b>Скептик</b> найдёт слабые места, <b>Мечтатель</b> вернёт мотивацию, <b>Философ</b> посмотрит со стороны. Спроси — и получишь конкретный первый шаг.</p>
-            <div class="mentor-chips" role="list">
-              <span class="mc mc-violet">Практик</span>
-              <span class="mc mc-cyan">Скептик</span>
-              <span class="mc mc-gold">Мечтатель</span>
-              <span class="mc mc-green">Философ</span>
-            </div>
-          </div>
-          <div class="split-visual reveal">
-            <figure class="phone">
-              <img src="assets/shot_wishchat.webp" width="780" height="1688" alt="Чат с ИИ-наставниками по желанию: конкретные советы, с чего начать" loading="lazy" decoding="async">
-            </figure>
-            <figcaption class="shot-caption">Наставники советуют, с чего начать</figcaption>
-          </div>
-        </div>
-
-        <div class="split rev wish-block">
-          <div class="split-copy">
-            <span class="step-num" aria-hidden="true">4</span>
-            <h3>Майлстоуны превращаются в задачи</h3>
-            <p>Шаги из желания автоматически становятся задачами в тудушке с общим тегом. Мечта перестаёт быть мечтой — она начинает жить в твоём расписании, рядом с обычными делами.</p>
-            <p><span class="tagchip">#карелия</span> — все шаги желания собраны одним тегом</p>
-          </div>
-          <div class="split-visual reveal">
-            <figure class="phone">
-              <img src="assets/shot_hist.webp" width="780" height="1688" alt="История: задачи-шаги желания с тегом карелия" loading="lazy" decoding="async">
-            </figure>
-            <figcaption class="shot-caption">Шаги желания с тегом #карелия — уже в задачах</figcaption>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TODO FOCUS ============ -->
-  <section class="section" id="todo">
-    <div class="container split">
-      <div class="split-copy">
-        <span class="chip chip-violet reveal">Фокус</span>
-        <h2 class="reveal">Фокус, <span class="grad-text">а не завал</span></h2>
-        <p class="section-sub reveal">На главном экране всегда ровно одна задача.</p>
-        <ul class="gestures reveal" role="list">
-          <li><b>Тап</b> по карточке — открыть задачу</li>
-          <li><b>Свайп вправо</b> — пропустить и перейти к следующей</li>
-          <li><b>Потянул карточку</b> в тудушке — соседи подвинуваются сами</li>
-        </ul>
-        <p class="bridge bridge-left reveal">Очередь вместо кладбища дел: ты видишь то, что нужно сделать сейчас.</p>
-      </div>
-      <div class="split-visual reveal">
-        <figure class="phone">
-          <img src="assets/shot_todo_rich.webp" width="780" height="1688" alt="Тудушка с 14 задачами, у каждой — умная дата" loading="lazy" decoding="async">
-        </figure>
-        <figcaption class="shot-caption">Тудушка: 14 задач, у каждой дата — все появились сами, из заметок</figcaption>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CALENDAR ============ -->
-  <section class="section section-alt" id="calendar">
-    <div class="container split rev">
-      <div class="split-copy">
-        <span class="chip chip-cyan reveal">Календарь</span>
-        <h2 class="reveal">Календарь, который <span class="grad-text">сам заполняется</span></h2>
-        <ol class="steps reveal">
-          <li>Даты прилетают прямо из текста: «до пятницы», «на следующей неделе», «завтра в 18:00»</li>
-          <li>Тап на день — план дня списком</li>
-          <li>Кнопка «Раскидать» — очередь разъезжается по дням конвейером</li>
-          <li>Долгое нажатие — перетащить задачу на другой день или час</li>
-        </ol>
-        <p class="note-muted reveal">Вид месяца и недели · счётчик задач на каждом дне.</p>
-      </div>
-      <div class="split-visual reveal">
-        <figure class="phone">
-          <img src="assets/shot_calendar.webp" width="780" height="1688" alt="Календарь сентября: точки на днях с задачами, внизу ближайшие" loading="lazy" decoding="async">
-        </figure>
-        <figcaption class="shot-caption">Сентябрь: точки = дни с задачами, внизу — ближайшие</figcaption>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MIND MAP ============ -->
-  <section class="section" id="mind">
+  <!-- ============ MAGIC INPUT (ловец мыслей) ============ -->
+  <section class="section section-alt" id="magic">
     <div class="container">
       <div class="split">
-        <div class="split-visual duo reveal">
-          <figure class="phone">
-            <img src="assets/shot_cloud.webp" width="780" height="1688" alt="Облако слов из реальных записей пользователя" loading="lazy" decoding="async">
-          </figure>
-          <figure class="phone phone-sm">
-            <img src="assets/shot_graph.webp" width="780" height="1688" alt="Граф записей, сгруппированных в сферы жизни" loading="lazy" decoding="async">
-          </figure>
-        </div>
         <div class="split-copy">
-          <span class="chip chip-cyan reveal">Карта мыслей</span>
-          <h2 class="reveal">Посмотри на свою голову <span class="grad-text">со стороны</span></h2>
-          <div class="mini-cards reveal">
-            <div class="card card-cyan">
-              <h3>Облако слов</h3>
-              <p>Что занимает мысли чаще всего — то и крупнее. Сразу видно, куда уходит внимание.</p>
-            </div>
-            <div class="card card-violet">
-              <h3>Граф-сферы</h3>
-              <p>Записи группируются в сферы жизни; чем сильнее приближаешь — тем больше деталей проявляется.</p>
-            </div>
+          <span class="chip chip-violet reveal">Главная фишка</span>
+          <h2 class="reveal">Ловец мыслей: <span class="grad-text">написал — и всё само</span></h2>
+          <p class="reveal">Одна строка — как будто шепнул другу. ИИ понимает, <i>что</i> это: задача, мысль или мечта. Находит даты и время прямо в тексте, выбирает область жизни, ставит в календарь.</p>
+          <ul class="magic-list reveal" role="list">
+            <li><b>«Позвонить маме завтра в 18:00»</b> — задача на завтра, 18:00, в календаре</li>
+            <li><b>«Добавь в календарь: Леха должен вернуть 10 000»</b> — чистая задача на нужном дне</li>
+            <li><b>«Запомни всегда: двигаться каждый день»</b> — станет правилом, Хэзи напомнит утром</li>
+            <li><b>«Хочу в Японию весной»</b> — желание с обложкой, категорией и планом шагов</li>
+          </ul>
+          <p class="note-gold reveal">🎤 Удобнее голосом? Зажми большую кнопку и просто говори — отпустишь, всё улетит.</p>
+        </div>
+        <div class="split-visual reveal">
+          <div class="catcher" id="catcher" aria-live="polite">
+            <div class="catcher-input"><span class="catcher-star" aria-hidden="true">✦</span><span id="catcherText"></span><span class="caret" aria-hidden="true"></span></div>
+            <div class="catcher-tags" id="catcherTags"></div>
+            <button class="btn btn-ghost btn-sm catcher-again" id="catcherAgain" type="button">Поймать ещё мысль ↻</button>
           </div>
-          <p class="note-muted reveal">Связи между записями ИИ находит сам — достаточно нажать «Найти связи».</p>
+          <figure class="phone phone-tilt-sm">
+            <img src="assets/shot_todo.webp" width="780" height="1688" alt="Тудушка: задачи с датами появились сами из обычного текста" loading="lazy" decoding="async">
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ AI CHAT ============ -->
-  <section class="section section-alt" id="ai">
-    <div class="container split">
-      <div class="split-copy">
-        <span class="chip chip-violet reveal">ИИ-чат</span>
-        <h2 class="reveal">ИИ, который <span class="grad-text">знает твои планы</span></h2>
-        <p class="reveal">Общий чат помнит все твои записи: спроси «что у меня по планам на неделю» — получишь сводку по заметкам, задачам и желаниям. Никаких ручных отчётов: ИИ собирает картину из того, что ты уже написал.</p>
-        <ul class="gestures reveal" role="list">
-          <li><b>Сводка по всей базе</b> — планы, дела и мечты в одном ответе</li>
-          <li><b>Итог дня в 22:00</b> — сделано, деньги, настроение</li>
-          <li><b>Данные только твои</b> — вход анонимный, без аккаунтов</li>
-        </ul>
-      </div>
+  <!-- ============ FOCUS ============ -->
+  <section class="section" id="focus">
+    <div class="container split rev">
       <div class="split-visual reveal">
-        <figure class="phone">
-          <img src="assets/shot_chat.webp" width="780" height="1688" alt="ИИ-чат: сводка планов по всей базе заметок" loading="lazy" decoding="async">
+        <figure class="phone phone-glow">
+          <img src="assets/shot_main.webp" width="780" height="1688" alt="Фокус-карточка: одна задача на весь день" loading="lazy" decoding="async">
         </figure>
-        <figcaption class="shot-caption">Спросил «что по планам» — получил сводку по всей базе</figcaption>
+        <figcaption class="shot-caption">Главный экран: ровно одна задача, а не завал из 47</figcaption>
+      </div>
+      <div class="split-copy">
+        <span class="chip chip-cyan reveal">Против распыления</span>
+        <h2 class="reveal">Одна задача. <span class="grad-text">Ноль шума.</span></h2>
+        <p class="reveal">Мозг не умеет делать десять дел сразу — но обожает переключаться и тревожиться. Поэтому наверху главного экрана живёт <b>ровно одна задача</b>: самая важная прямо сейчас.</p>
+        <ul class="gestures reveal" role="list">
+          <li><b>«Готово»</b> — закрыл и получил свои ⚡</li>
+          <li><b>«Пропустить»</b> — честно отложил, очередь сама подвинула следующую</li>
+          <li><b>Жест ✕</b> на экране — задача выполнена одним росчерком</li>
+        </ul>
+        <p class="bridge bridge-left reveal">Дела «на потом» ждут в разделе по датам — они не мелькают и не давят. Психология без давления, порядок без нерфов.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOY OF CROSSING OUT ============ -->
+  <section class="section section-alt" id="joy">
+    <div class="container">
+      <div class="split">
+        <div class="split-copy">
+          <span class="chip chip-gold reveal">Самый приятный момент</span>
+          <h2 class="reveal">Кайф <span class="grad-text">зачёркивания</span></h2>
+          <p class="reveal">Есть особенное удовольствие в том, чтобы вычеркнуть дело. Приложение делает из этого маленький праздник: строка торжественно перечёркивается, разлетаются искры, Хэзи получает ⚡, а ты — Proof, что день прожит не зря.</p>
+          <p class="reveal">У Хэзи за это растут уровни и стрики 🔥 — неделя без пропусков ценится дороже, чем одна героическая ночь.</p>
+          <p class="note-gold reveal">Психологи зовут это «петлёй завершения» — мозг любит доводить до конца. Мы просто не мешаем ему это любить.</p>
+        </div>
+        <div class="split-visual reveal">
+          <div class="cross-demo">
+            <div class="cross-card" id="crossCard" role="button" tabindex="0" aria-label="Тапни, чтобы выполнить задачу">
+              <div class="cross-meta">#1 · Задача · сегодня</div>
+              <div class="cross-text" id="crossText">Тренировка: спина и руки</div>
+              <div class="cross-actions"><span class="cross-btn" id="crossBtn"><span class="note-donebox" aria-hidden="true"></span>Выполнить</span></div>
+              <canvas id="confetti" aria-hidden="true"></canvas>
+            </div>
+            <p class="cross-hint" id="crossHint">👆 Тапни по карточке — попробуй сам</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HAZI ============ -->
+  <section class="section hazi-section" id="hazi">
+    <div class="container">
+      <span class="chip chip-violet reveal">Живой напарник</span>
+      <h2 class="reveal">Хэзи растёт <span class="grad-text">от твоих дел</span></h2>
+      <p class="section-sub reveal">Искорка, которая вылупляется из первой мысли, проходит путь до Сверхчеловека. Каждый выполненный шаг — это ⚡ для него и для тебя. Уровень никогда не падает.</p>
+      <div class="stages reveal" id="stages" role="list">
+        <div class="stage" role="listitem" data-name="Искорка" data-lvl="1–2"><span class="stage-svg">HAZI_SVG_1</span><b>Искорка</b><span class="stage-lvl">ур. 1–2</span></div>
+        <div class="stage" role="listitem" data-name="Комочек" data-lvl="3–4"><span class="stage-svg">HAZI_SVG_2</span><b>Комочек</b><span class="stage-lvl">ур. 3–4</span></div>
+        <div class="stage" role="listitem" data-name="Подмастерье" data-lvl="5–6"><span class="stage-svg">HAZI_SVG_3</span><b>Подмастерье</b><span class="stage-lvl">ур. 5–6</span></div>
+        <div class="stage" role="listitem" data-name="Герой" data-lvl="7–9"><span class="stage-svg">HAZI_SVG_4</span><b>Герой</b><span class="stage-lvl">ур. 7–9</span></div>
+        <div class="stage" role="listitem" data-name="Сверхчеловек" data-lvl="10"><span class="stage-svg">HAZI_SVG_5</span><b>Сверхчеловек</b><span class="stage-lvl">ур. 10</span></div>
+      </div>
+      <div class="split hazi-more">
+        <div class="split-copy">
+          <h3 class="reveal">⚡ — валюта заботы</h3>
+          <p class="reveal">Заработанные ⚡ тратятся в гардеробе: плащ героя, наушники, корона… 14 предметов на любой вкус. Примерка бесплатна, а купленное — навсегда. Уровень считается от лучшего результата, поэтому траты ничего не отнимают.</p>
+          <p class="reveal">Утром Хэзи тихо напомнит то, что ты просил помнить всегда. Вечером покажет статистику дня: что сделано, что добавлено, сколько ⚡ заработано.</p>
+        </div>
+        <div class="split-visual duo-phones reveal">
+          <figure class="phone phone-sm"><img src="assets/shot_hazi.webp" width="780" height="1688" alt="Экран Хэзи: уровень, полоса прогресса, статистика" loading="lazy" decoding="async"></figure>
+          <figure class="phone phone-sm"><img src="assets/shot_wardrobe.webp" width="780" height="1688" alt="Гардероб Хэзи: 14 предметов за ⚡" loading="lazy" decoding="async"></figure>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ COMPARE ============ -->
-  <section class="section" id="compare">
+  <section class="section" id="vs">
     <div class="container">
-      <h2 class="reveal">Почему не <span class="grad-text">очередная заметка</span></h2>
-      <p class="section-sub reveal">Чего нет в обычных приложениях — и что уже работает здесь.</p>
+      <span class="chip chip-cyan reveal">Честное сравнение</span>
+      <h2 class="reveal">Почему Хэзи, <span class="grad-text">а не…</span></h2>
+      <p class="section-sub reveal">Мы уважительно относимся к классике — и всё-таки.</p>
+      <div class="vs-grid reveal">
+        <article class="vs-card">
+          <h3>📅 Календарь из телефона</h3>
+          <p class="vs-pain">Форма на 5 полей, чтобы записать «позвонить маме». Мысли до него не доживают.</p>
+          <p class="vs-hazi"><b>Хэзи:</b> «позвонить маме завтра в 18:00» — уже задача в календаре. Даты находит в тексте сам.</p>
+        </article>
+        <article class="vs-card">
+          <h3>✅ Таск-менеджер</h3>
+          <p class="vs-pain">47 дел одним списком, ручная сортировка и вечно невыключенный «входящий».</p>
+          <p class="vs-hazi"><b>Хэзи:</b> одна задача в фокусе, умная очередь, кайф зачёркивания и живой мотиватор рядом.</p>
+        </article>
+        <article class="vs-card">
+          <h3>📝 Заметки</h3>
+          <p class="vs-pain">Всё хранят, ничего не делают. Поиск выдаёт 200 результатов по слову «идея».</p>
+          <p class="vs-hazi"><b>Хэзи:</b> мысль становится задачей или правилом, а облако слов показывает, чем живёт твоя голова.</p>
+        </article>
+        <article class="vs-card">
+          <h3>🌠 Доска желаний</h3>
+          <p class="vs-pain">Вдохновляет до момента «ну и что дальше?».</p>
+          <p class="vs-hazi"><b>Хэзи:</b> желание получает обложку, категорию, план шагов и ИИ-наставников — и шаги уже в тудушке.</p>
+        </article>
+      </div>
       <div class="tbl-wrap reveal">
         <table class="tbl">
-          <thead>
-            <tr>
-              <th>Возможность</th>
-              <th>Обычные заметки и тудушки</th>
-              <th>Хэзэнштейн</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Возможность</th><th>Обычные приложения</th><th>Хэзэнштейн</th></tr></thead>
           <tbody>
-            <tr><td>ИИ разбирает строку: задача это, заметка, дата?</td><td class="no">Всё руками</td><td>Сам, за секунды</td></tr>
-            <tr><td>Умные даты из текста</td><td class="no">«Выбери в календаре»</td><td>«Завтра», «до пятницы» понимаются сами</td></tr>
-            <tr><td>Фокус дня на главном экране</td><td class="no">Длинный список</td><td>Одна задача, свайп — следующая</td></tr>
-            <tr><td>Желание превращается в задачи</td><td class="no">Отдельное приложение</td><td>План + тег + тудушка</td></tr>
-            <tr><td>Карта мыслей и сферы жизни</td><td class="no">Нет</td><td>Облако + граф с зумом</td></tr>
-            <tr><td>Итог дня в 22:00</td><td class="no">Нет</td><td>Сделано, деньги, настроение</td></tr>
-            <tr><td>Установка</td><td class="no">Стор + аккаунты</td><td>PWA: браузер, офлайн, анонимно</td></tr>
+            <tr><td>Поймать мысль одной строкой</td><td class="no">Всё руками</td><td class="yes">Сам разберёт, что это</td></tr>
+            <tr><td>Даты и время из текста</td><td class="no">Поля и пикеры</td><td class="yes">«Завтра в 18:00», «до пятницы»</td></tr>
+            <tr><td>Фокус дня</td><td class="no">Длинный список</td><td class="yes">Одна задача + жест ✕</td></tr>
+            <tr><td>Радость от выполнения</td><td class="no">Тусклая галочка</td><td class="yes">Зачёркивание, искры, ⚡</td></tr>
+            <tr><td>Живой напарник</td><td class="no">Нет</td><td class="yes">Хэзи растёт от твоих дел</td></tr>
+            <tr><td>Желание → план → задачи</td><td class="no">Три приложения</td><td class="yes">Один ввод, всё связалось</td></tr>
+            <tr><td>Наставники по мечте</td><td class="no">Нет</td><td class="yes">Практик, Скептик, Мечтатель, Философ</td></tr>
+            <tr><td>Правила «помнить всегда»</td><td class="no">Нет</td><td class="yes">Утреннее напоминание от Хэзи</td></tr>
+            <tr><td>Карта мыслей</td><td class="no">Нет</td><td class="yes">Облако слов + граф-сферы</td></tr>
+            <tr><td>Итог дня</td><td class="no">Нет</td><td class="yes">В 22:00 само: дела, деньги, настроение</td></tr>
+            <tr><td>Регистрация</td><td class="no">Аккаунт, почта</td><td class="yes">Открыл — и работаешь</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="bridge reveal gold">Это личное приложение одного человека — поэтому в нём нет ничего лишнего.</p>
     </div>
   </section>
 
-  <!-- ============ CTA ============ -->
-  <section class="section cta-section" id="cta">
-    <div class="container cta-grid">
-      <div>
-        <h2 class="reveal">Как это изменит <span class="grad-text">твою жизнь</span></h2>
-        <ul class="rhythm reveal" role="list">
-          <li><b>Утром</b><span> — открываешь и видишь одну задачу дня, а не 47 дел.</span></li>
-          <li><b>Днём</b><span> — планы сами встают в календарь из одной строки.</span></li>
-          <li><b>Вечером, в 22:00</b><span> — приложение подводит итог: что сделано, сколько потрачено, какое настроение.</span></li>
+  <!-- ============ WISHES ============ -->
+  <section class="section section-alt" id="wishes">
+    <div class="container split">
+      <div class="split-copy">
+        <span class="chip chip-gold reveal">Желания</span>
+        <h2 class="reveal">Мечта получает <span class="grad-text">маршрут</span></h2>
+        <p class="reveal">«Поездка в Японию весной» — через несколько секунд у мечты появляется карточка: обложка, нарисованная ИИ, категория и честный план из шагов. Шаги сразу становятся задачами с общим тегом — мечта начинает жить в твоём расписании.</p>
+        <ul class="gestures reveal" role="list">
+          <li><b>Σ — копилка желания:</b> оценка стоимости, чтобы копить осознанно</li>
+          <li><b>Четыре наставника:</b> Практик даст план, Скептик найдёт слабое место, Мечтатель вернёт огонь, Философ посмотрит со стороны</li>
+          <li><b>Прогресс 0/5:</b> видно, что движется, а что ждёт</li>
         </ul>
       </div>
       <div class="split-visual reveal">
-        <figure class="phone phone-tilt">
-          <img src="assets/shot_summary.webp" width="780" height="1688" alt="Вечерний итог дня: сделано, потрачено, настроение" loading="lazy" decoding="async">
+        <figure class="phone">
+          <img src="assets/shot_wishes.webp" width="780" height="1688" alt="Желание с ИИ-обложкой: сакура, шаги, копилка" loading="lazy" decoding="async">
         </figure>
-        <figcaption class="shot-caption">Вечерний итог — как за хороший день</figcaption>
+        <figcaption class="shot-caption">Обложку, шаги и категорию собрал ИИ — из одной строки</figcaption>
       </div>
     </div>
+  </section>
+
+  <!-- ============ MORE FEATURES ============ -->
+  <section class="section" id="more">
+    <div class="container">
+      <span class="chip chip-violet reveal">И ещё волшебство</span>
+      <h2 class="reveal">Мелочи, которых <span class="grad-text">не хватает другим</span></h2>
+      <div class="grid-4">
+        <article class="card reveal"><span class="ic ic-gold" aria-hidden="true">🌙</span><h3>Итог дня в 22:00</h3><p>Приложение само подведёт итог: что сделано, сколько потрачено, какое настроение. Как разговор с самим собой — только без усилий.</p></article>
+        <article class="card reveal"><span class="ic ic-cyan" aria-hidden="true">🧠</span><h3>Карта мыслей</h3><p>Облако слов: чем чаще думаешь — тем крупнее. Плюс граф-сферы жизни и связи между записями, которые ИИ находит сам.</p></article>
+        <article class="card reveal"><span class="ic ic-violet" aria-hidden="true">🗓️</span><h3>Календарь-конвейер</h3><p>Кнопка «Раскидать» разъезжает очередь по дням за секунду. Перетаскивание, часы, план дня по тапу.</p></article>
+        <article class="card reveal"><span class="ic ic-gold" aria-hidden="true">🔖</span><h3>Помнить всегда</h3><p>1–2 личных правила, которые Хэзи тихо напомнит утром. Не тудушка — просто то, что тебе важно не забыть о себе.</p></article>
+        <article class="card reveal"><span class="ic ic-cyan" aria-hidden="true">🔥</span><h3>Стрики и бонусы</h3><p>День без пропуска — +2 ⚡, неделя — уже ×10. Рекорды хранятся, чтобы было приятно возвращаться.</p></article>
+        <article class="card reveal"><span class="ic ic-violet" aria-hidden="true">💬</span><h3>ИИ, который знает контекст</h3><p>Спроси «что у меня на неделе?» — получишь сводку по своим же записям. ИИ-психолог раз в неделю бережно подведёт итоги.</p></article>
+        <article class="card reveal"><span class="ic ic-gold" aria-hidden="true">🎨</span><h3>Темы-настроения</h3><p>Космос, фонарики, минимал, бизнес, мечта — приложение подстраивается под вечер или рабочий ритм.</p></article>
+        <article class="card reveal"><span class="ic ic-cyan" aria-hidden="true">⚡</span><h3>Работает везде</h3><p>Телефон, планшет, компьютер — данные с тобой. Офлайн-режим: мысли ловятся даже в метро и самолёте.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIFE RHYTHM ============ -->
+  <section class="section section-alt" id="life">
+    <div class="container">
+      <h2 class="reveal">Как это меняет день</h2>
+      <p class="section-sub reveal">Не «продуктивность ради продуктивности» — а спокойный ритм.</p>
+      <div class="grid-3">
+        <article class="card card-time reveal">
+          <span class="time-ic" aria-hidden="true">🌅</span>
+          <h3>Утро</h3>
+          <p>Открываешь — а там одна задача и тихое напоминание от Хэзи: «двигаться каждый день». Не лента, не уведомления — только твой фокус.</p>
+        </article>
+        <article class="card card-time reveal">
+          <span class="time-ic" aria-hidden="true">☀️</span>
+          <h3>День</h3>
+          <p>Мысль прилетела — записал одной строкой и забыл: приложение само вспомнит вовремя. Дела разлетаются по календарю, мечта потихоньку двигается шагами.</p>
+        </article>
+        <article class="card card-time reveal">
+          <span class="time-ic" aria-hidden="true">🌙</span>
+          <h3>Вечер</h3>
+          <p>Итог дня в 22:00: три победы, настроение, потрачено. Зачёркнутые строки дают тот самый кайф — и хочется завтра повторить.</p>
+        </article>
+      </div>
+      <blockquote class="manifest reveal">«Мы делали Хэзи с любовью — как маленький талисман, который всегда в кармане. Он не гонит и не стыдит. Он просто ловит твои мысли, бережёт их и превращает в шаги, которыми можно гордиться.»</blockquote>
+    </div>
+  </section>
+
+  <!-- ============ CTA + QR ============ -->
+  <section class="section cta-section" id="get">
     <div class="container">
       <div class="cta-card reveal">
-        <h3>Попробуй прямо сейчас</h3>
-        <a class="cta-link" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">lexxgreat.github.io/hz3</a>
-        <p>Открывается в браузере · ставится на телефон за 10 секунд · вход анонимный · данные только твои</p>
+        <div class="cta-hazi" aria-hidden="true">HAZI_SVG_4</div>
+        <h2>Хэзи уже ждёт<br><span class="grad-text">первую твою мысль</span></h2>
+        <p class="cta-sub">Открой на телефоне — и через минуту у тебя появится собственный Хэзи.</p>
+        <div class="cta-row">
+          <div class="qr-wrap">
+            <img src="assets/qr_app.svg" width="220" height="220" alt="QR-код: открыть Хэзэнштейн" loading="lazy">
+            <span class="qr-label">Наведи камеру</span>
+          </div>
+          <div class="cta-side">
+            <a class="btn btn-primary btn-lg" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть в браузере →</a>
+            <span class="cta-link">lexxgreat.github.io/hz3</span>
+            <p class="cta-note">Вход без регистрации · данные только твои · <b>скоро — полноценное приложение в сторах</b></p>
+          </div>
+        </div>
+        <p class="cta-tip">💡 Совет: открой ссылку на телефоне → «Добавить на домашний экран» — и Хэзи будет всегда под рукой, как родное приложение.</p>
       </div>
     </div>
   </section>
@@ -403,35 +360,13 @@
 
 <footer class="footer">
   <div class="container footer-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">ХЗ</span>
-      <span class="brand-name">Хэзэнштейн</span>
-    </a>
-    <p class="footer-tag">Одна строка — и ИИ разложит всё сам.</p>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">ХЗ</span><span class="brand-name">Хэзэнштейн</span></a>
+    <p class="footer-tag">Мысль прилетела — Хэзи её поймает.</p>
     <a class="footer-link" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение →</a>
   </div>
-  <p class="footer-copy">© <span id="year">2026</span> Хэзэнштейн · сделано с любовью к порядку</p>
+  <p class="footer-copy">© <span id="year">2026</span> Хэзэнштейн · сделано с любовью, вдохновением и заботой о людях</p>
 </footer>
 
-<!-- ============ DECK — десктоп-презентация (1280×720 слайды) ============ -->
-<div class="deck" id="deck" role="region" aria-label="Презентация Хэзэнштейн">
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_01.html" title="Хэзэнштейн — обложка" scrolling="no" tabindex="-1" loading="eager"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_02.html" title="Хэзэнштейн — знакомо?" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_03.html" title="Хэзэнштейн — одна строка" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_04.html" title="Хэзэнштейн — всё в одном кармане" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_05.html" title="Хэзэнштейн — фокус" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_06.html" title="Хэзэнштейн — календарь" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_07.html" title="Хэзэнштейн — желания" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_08.html" title="Хэзэнштейн — карта мыслей" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_08b.html" title="Хэзэнштейн — ИИ-чат" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_09.html" title="Хэзэнштейн — сравнение" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-  <section class="deck-slide"><div class="deck-frame"><iframe src="deck/slide_10.html" title="Хэзэнштейн — попробуй сейчас" scrolling="no" tabindex="-1" loading="lazy"></iframe></div></section>
-</div>
-<nav class="deck-dots" aria-label="Навигация по слайдам"></nav>
-<a class="btn btn-primary btn-sm deck-cta" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть приложение</a>
-
-<script src="js/deck.js" defer></script>
-<script src="js/main.js"></script>
-
+<script src="js/main.js" defer></script>
 </body>
 </html>
