@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Хэзэнштейн — Попробуй сейчас</title>
+<link rel="stylesheet" href="global.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .cta-card{position:relative;border:1px solid rgba(108,71,255,0.5);border-radius:28px;padding:54px 56px 44px;background:linear-gradient(135deg,rgba(108,71,255,0.18),rgba(0,212,255,0.08));box-shadow:0 24px 80px rgba(108,71,255,0.25);display:flex;align-items:center;gap:44px}
+  .cta-hazi{position:absolute;top:-46px;left:50%;transform:translateX(-50%);width:92px;filter:drop-shadow(0 0 22px rgba(0,212,255,0.45))}
+  .cta-hazi svg{width:100%;height:auto}
+  .cta-h1{font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h1);line-height:1.14;letter-spacing:-.5px;color:var(--primary);margin:0}
+  .cta-sub{color:var(--muted);font-size:var(--fs-h3);line-height:1.5;margin:14px 0 0}
+  .btn-main{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#8F6BFF 55%,#00D4FF);color:#fff;font-family:var(--font-heading);font-weight:700;font-size:var(--fs-h3);text-decoration:none;box-shadow:0 12px 34px rgba(108,71,255,0.4);transition:transform .2s ease,box-shadow .2s ease}
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 42px rgba(108,71,255,0.55)}
+  .cta-note{color:var(--muted);font-size:var(--fs-small);line-height:1.6;margin:14px 0 0;max-width:520px}
+  .cta-tip{color:var(--gold);font-size:var(--fs-small);line-height:1.55;margin:0}
+  .qr{display:flex;flex-direction:column;align-items:center;gap:8px;flex:none}
+  .qr img{width:180px;height:180px;display:block;border-radius:14px;background:#fff;padding:10px}
+</style>
+</head>
+<body>
+<div class="slide">
+  <!-- ambient glow -->
+  <div class="orb orb-violet" data-decor aria-hidden="true" style="width:620px;height:620px;left:-230px;bottom:-260px"></div>
+  <div class="orb orb-cyan" data-decor aria-hidden="true" style="width:500px;height:500px;right:-170px;top:-210px;opacity:.24"></div>
+
+  <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:100%;padding:56px 64px 48px">
+
+    <div class="cta-card" style="max-width:1120px;width:100%">
+      <div class="cta-hazi" aria-hidden="true"><svg class="hazi-svg st4" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-worn=""><defs><radialGradient id="hzG" cx="35%" cy="30%" r="80%"><stop offset="0%" stop-color="#B79CFF"/><stop offset="55%" stop-color="#7C5CFF"/><stop offset="100%" stop-color="#5A38E8"/></radialGradient><linearGradient id="hzCapeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFD166"/><stop offset="100%" stop-color="#FF9F43"/></linearGradient></defs><g class="hz-a-hero"><path class="hz-cape" d="M32 15 C47.5 15 54.5 28 53.5 38.5 C52.6 51 45 57.5 32 57.5 C19 57.5 11.4 51 10.5 38.5 C9.5 28 16.5 15 32 15 Z" fill="url(#hzCapeG)"/><path d="M32 13 C43.5 13 49.5 23.5 48.5 34 C47.6 45 41 50.5 32 50.5 C23 50.5 16.4 45 15.5 34 C14.5 23.5 20.5 13 32 13 Z" fill="url(#hzG)"/><circle cx="25" cy="23" r="4.6" fill="rgba(255,255,255,0.32)"/><path d="M21.5 29.5 h21 a2.4 2.4 0 0 1 2.4 2.4 v2.4 a3.4 3.4 0 0 1 -3.4 3.4 h-5 l-2.9 -2.2 -2.9 2.2 h-9.2 a3.4 3.4 0 0 1 -3.4 -3.4 v-2.4 a2.4 2.4 0 0 1 2.4 -2.4z" fill="#00D4FF" opacity="0.93"/><ellipse cx="27.2" cy="33.8" rx="2.3" ry="1.6" fill="#fff"/><ellipse cx="36.8" cy="33.8" rx="2.3" ry="1.6" fill="#fff"/><circle cx="27.6" cy="34" r="1" fill="#060918"/><circle cx="37.2" cy="34" r="1" fill="#060918"/><path d="M29 42 h6" stroke="#060918" stroke-width="1.6" stroke-linecap="round"/></g></svg></div>
+
+      <!-- LEFT: copy — как в секции -->
+      <div style="flex:1;min-width:0">
+        <h1 class="cta-h1">Хэзэнштейн уже ждёт<br><span class="grad-text">первую твою мысль</span></h1>
+        <p class="cta-sub">Открой на телефоне — и через минуту у тебя появится собственный напарник. Записал — не потеряешь.</p>
+
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:26px">
+          <a class="btn-main" href="https://lexxgreat.github.io/hz3/" target="_blank" rel="noopener">Открыть в браузере →</a>
+          <span class="grad-text" style="font-family:var(--font-heading);font-weight:800;font-size:var(--fs-h2)">lexxgreat.github.io/hz3</span>
+          <p class="cta-note">Бесплатно · без регистрации · данные только твои · <b style="color:var(--primary)">скоро — полноценное приложение в сторах</b></p>
+        </div>
+
+        <p class="cta-tip" style="margin-top:22px">💡 Совет: открой ссылку на телефоне → «Добавить на домашний экран» — и Хэзэнштейн будет всегда под рукой, как родное приложение.</p>
+      </div>
+
+      <!-- RIGHT: QR -->
+      <div class="qr">
+        <img src="../assets/qr_app.svg" alt="QR-код: открыть Хэзэнштейн" loading="lazy">
+        <span class="shot-caption">Наведи камеру</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
