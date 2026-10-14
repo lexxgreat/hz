@@ -5,7 +5,6 @@
   if (!deck) { return; }
 
   var sections = Array.prototype.slice.call(deck.querySelectorAll('.deck-slide'));
-  var frames = Array.prototype.slice.call(deck.querySelectorAll('.deck-frame'));
   var dotsWrap = document.querySelector('.deck-dots');
   var dots = [];
 
@@ -36,33 +35,11 @@
     }
   }
 
-  /* --- Масштаб слайдов: канва 1280×720 → размер окна ---
-     Фрейму задаём размер 1280s×720s, а сам слайд внутри
-     применяет zoom = s (см. фит-скрипт в slide_*.html),
-     поэтому текст остаётся чётким, а не растянутым. */
-  var deckVisible = function () {
-    return window.getComputedStyle(deck).display !== 'none';
-  };
-
-  function sizeFrames() {
-    if (!deckVisible()) { return; }
-    var vw = deck.clientWidth;
-    var vh = deck.clientHeight;
-    if (!vw || !vh) { return; }
-    var s = Math.min(vw / 1280, vh / 720);
-    frames.forEach(function (f) {
-      f.style.width = (1280 * s) + 'px';
-      f.style.height = (720 * s) + 'px';
-    });
-  }
-
-  var raf = null;
-  window.addEventListener('resize', function () {
-    if (raf) { cancelAnimationFrame(raf); }
-    raf = requestAnimationFrame(sizeFrames);
-  });
-  window.addEventListener('load', sizeFrames);
-  sizeFrames();
+  /* --- v3-FLUID: масштабирование слайдов больше не нужно ---
+     Раньше фрейм сжимался до 1280s×720s (letterbox → «рамки по краям» на
+     широких экранах). Теперь слайд жидкий: iframe = всё окно, а типографика
+     и отступы масштабаются внутри через --u (deck/global.css).
+     Фреймы 100%×100% задаёт css/style.css, JS остаётся только для точек. */
 
   /* --- Клавиатура: стрелки / PgUp / PgDn / Home / End --- */
   function currentIndex() {

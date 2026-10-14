@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1280, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Хэзэнштейн — Желания становятся планами</title>
 <link rel="stylesheet" href="global.css">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +33,7 @@
   <div class="relative z-10 h-full flex" style="padding:52px 60px 46px 64px;gap:34px;">
 
     <!-- LEFT: title + step chain -->
-    <div class="flex flex-col" style="width:530px;flex:none;">
+    <div class="flex flex-col" style="width:min(530px,44%);flex:none;">
       <h1 class="h1">Желание <span class="grad-text">→ план</span> <span class="cyan-text">→</span> задачи</h1>
       <p class="sub">Загадал — ИИ превратил в конкретику</p>
 
@@ -68,15 +68,14 @@
 
     <!-- RIGHT: two overlapping screenshots -->
     <div class="flex-1 relative">
-      <div style="position:absolute;left:91px;top:2px;width:410px;">
-        <img src="../assets/shot_wishform.webp" alt="Форма желания, заполненная ИИ" class="phone-shot" style="height:555px;width:auto;display:block;">
-        <img src="../assets/shot_wishchat.webp" alt="Чат с наставниками по желанию" class="phone-shot shadow-top" style="height:500px;width:auto;display:block;position:absolute;left:180px;top:62px;z-index:2;">
-        <p class="shot-caption" style="color:var(--muted);position:absolute;left:0;right:-40px;top:580px;text-align:center;line-height:1.6;">ИИ сам заполнил форму желания и советует, с чего начать</p>
+      <div style="position:absolute;left:0;top:2px;width:min(410px,100%);">
+        <img src="../assets/shot_wishform.webp" alt="Форма желания, заполненная ИИ" class="phone-shot" style="height:min(555px,70vh);width:auto;display:block;">
+        <img src="../assets/shot_wishchat.webp" alt="Чат с наставниками по желанию" class="phone-shot shadow-top" style="height:min(500px,63vh);width:auto;display:block;position:absolute;left:180px;top:9vh;z-index:2;">
+        <p class="shot-caption" style="color:var(--muted);position:absolute;left:-20px;right:-60px;bottom:-44px;text-align:center;line-height:1.6;">ИИ сам заполнил форму желания и советует, с чего начать</p>
       </div>
     </div>
 
   </div>
 </div>
-<script>(function(){function fit(){var w=document.documentElement.clientWidth;if(w>0){var z=w/1280;if(isFinite(z)&&z>0){document.documentElement.style.zoom=z;}}}addEventListener("resize",fit);addEventListener("load",fit);fit();})();</script>
 </body>
 </html>

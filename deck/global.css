@@ -20,22 +20,27 @@
   --line:rgba(255,255,255,0.09);
   --line-accent:rgba(108,71,255,0.38);
 
-  /* typography tokens (family + size only — no bundled classes) */
+  /* typography tokens (family + size only — no bundled classes)
+     v3-FLUID: размеры привязаны к --u = min(1vw, 16/9vh) — референс 1280×720
+     (там --u = 12.8px и токены равны прежним пиксельным значениям).
+     Слайд тянется на всё окно, текст масштабается вместе с ним — никаких
+     буквобоксов и рамок по краям (фидбек: «сплошной экран, подстраивается по размеру»). */
   --font-heading:'Manrope',sans-serif;
   --font-body:'Inter',sans-serif;
   --font-num:'Manrope',sans-serif;
-  --fs-display:62px;
-  --fs-h1:42px;
-  --fs-h2:28px;
-  --fs-h3:20px;
-  --fs-body:16.5px;
-  --fs-small:13.5px;
-  --fs-micro:11px;
+  --u:min(1vw, 1.77778vh);
+  --fs-display:calc(var(--u)*4.84);
+  --fs-h1:calc(var(--u)*3.28);
+  --fs-h2:calc(var(--u)*2.19);
+  --fs-h3:calc(var(--u)*1.5625);
+  --fs-body:calc(var(--u)*1.289);
+  --fs-small:calc(var(--u)*1.055);
+  --fs-micro:calc(var(--u)*0.859);
 }
 
-/* canvas */
+/* canvas — ЖИДКИЙ: занимает весь iframe (всё окно на десктопе) */
 .slide{
-  width:1280px;height:720px;overflow:hidden;position:relative;
+  width:100%;height:100vh;overflow:hidden;position:relative;
   background:var(--bg);color:var(--primary);
   font-family:var(--font-body);font-size:var(--fs-body);line-height:1.5;
 }
