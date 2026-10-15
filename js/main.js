@@ -246,7 +246,8 @@
       phone.classList.add('is-swapped');
       hint.textContent = '⚡ Новая задача выехала на главный — тапни, чтобы повторить';
     }, 950);
-    resetTimer = setTimeout(reset, 2900);
+    // держим новую задачу на экране ~4с (после выезда), чтобы было явно видно, что задача сменилась
+    resetTimer = setTimeout(reset, 5600);
   }
 
   function reset() {
@@ -255,7 +256,8 @@
     if (zap) zap.hidden = true;
     hint.textContent = origHint;
     playing = false;
-    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1100); }
+    // пауза после сброса: успеваем увидеть «начальное» состояние перед новым кругом
+    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1400); }
   }
 
   function animateStroke(a, b, done) {

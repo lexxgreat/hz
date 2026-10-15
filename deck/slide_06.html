@@ -122,8 +122,15 @@
   if (!wrap || !canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
 
-  var strokes = [], current = null, fadeRunning = false, resetTimer = null, swapTimer = null, loopTimer = null;
+  var strokes = [], current = null, fadeRunning = false, resetTimer = null, swapTimer = null, loopTimer = null, queued = false;
   var visible = false;
+
+  /* единая точка планирования повтора: queued сообщает страховке, что цикл уже запланирован */
+  function scheduleReplay(ms) {
+    queued = true;
+    clearTimeout(loopTimer);
+    loopTimer = setTimeout(function () { queued = false; playAuto(); }, ms);
+  }
 
   function sizeCanvas() {
     var r = canvas.getBoundingClientRect();
@@ -229,7 +236,8 @@
         celebrate();
         /* как в приложении: задача уходит — следующая выезжает на главный */
         swapTimer = setTimeout(function () { wrap.classList.add('is-swapped'); }, 950);
-        resetTimer = setTimeout(reset, 2900);
+        /* держим новую задачу ~4с после выезда — видно, что задача сменилась */
+        resetTimer = setTimeout(reset, 5600);
       });
     });
   }
@@ -238,33 +246,34 @@
     wrap.classList.remove('is-done');
     wrap.classList.remove('is-swapped');
     if (zap) zap.hidden = true;
-    if (visible) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1100); }
+    if (visible) { scheduleReplay(1400); }
   }
 
   /* играть только когда слайд в кадре */
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       visible = entries[0].isIntersecting;
-      clearTimeout(loopTimer);
-      if (visible) { loopTimer = setTimeout(playAuto, 420); }
+      queued = false; clearTimeout(loopTimer);
+      if (visible) { scheduleReplay(420); }
     }, { threshold: 0.35 }).observe(wrap);
   } else {
     visible = true;
-    loopTimer = setTimeout(playAuto, 420);
+    scheduleReplay(420);
   }
 
-  /* страховка: если анимация где-то прервалась (ресайз и т.п.) — перезапускаем цикл */
+  /* страховка: если анимация где-то прервалась (ресайз и т.п.) — перезапускаем цикл.
+     Если повтор уже запланирован (queued) — не вмешиваемся, чтобы не резать паузу круга */
   setInterval(function () {
-    if (visible && !current && !wrap.classList.contains('is-done')) {
+    if (visible && !queued && !current && !wrap.classList.contains('is-done')) {
       clearTimeout(resetTimer);
       clearTimeout(swapTimer);
-      clearTimeout(loopTimer);
+      queued = false; clearTimeout(loopTimer);
       wrap.classList.remove('is-swapped');
-      loopTimer = setTimeout(playAuto, 500);
+      scheduleReplay(500);
     }
   }, 5000);
 
-  window.addEventListener('resize', function () { clearTimeout(resetTimer); clearTimeout(swapTimer); clearTimeout(loopTimer); wrap.classList.remove('is-swapped'); sizeCanvas(); if (visible) { loopTimer = setTimeout(playAuto, 800); } });
+  window.addEventListener('resize', function () { clearTimeout(resetTimer); clearTimeout(swapTimer); queued = false; clearTimeout(loopTimer); wrap.classList.remove('is-swapped'); sizeCanvas(); if (visible) { scheduleReplay(800); } });
   sizeCanvas();
 })();
 </script>
