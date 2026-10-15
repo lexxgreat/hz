@@ -127,6 +127,7 @@
   var canvas = document.getElementById('xGestureCanvas');
   var hint = document.getElementById('crossHint');
   var zap = document.getElementById('crossZap');
+  var tasks = document.getElementById('crossTasks');
   var ctx = canvas ? canvas.getContext('2d') : null;
   if (!canvas || !ctx || !hint) return;
 
@@ -135,6 +136,7 @@
   var fadeRunning = false;
   var drawScheduled = false;
   var resetTimer = null;
+  var swapTimer = null;
   var loopTimer = null;
   var playing = false;
   var visible = false;
@@ -151,6 +153,8 @@
     var w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     ctx.setTransform(w / r.width, 0, 0, h / r.height, 0, 0);
+    // реплики задач масштабируются от ширины телефона: 1em = 10px исходного скриншота
+    if (tasks) { var pr = phone.getBoundingClientRect(); if (pr.width) tasks.style.fontSize = (pr.width / 78) + 'px'; }
   }
 
   // штрихи рисуются как в приложении: широкое свечение + тонкое ядро
@@ -236,12 +240,18 @@
     phone.classList.add('is-done');
     if (zap) zap.hidden = false;
     celebrate();
-    hint.textContent = '⚡ Вот так это работает. Тапни — повторю';
-    resetTimer = setTimeout(reset, 2600);
+    hint.textContent = '⚡ Есть! Задача закрыта — смотрим дальше';
+    // как в приложении: после празднования задача уходит, следующая выезжает на главный
+    swapTimer = setTimeout(function () {
+      phone.classList.add('is-swapped');
+      hint.textContent = '⚡ Новая задача выехала на главный — тапни, чтобы повторить';
+    }, 950);
+    resetTimer = setTimeout(reset, 2900);
   }
 
   function reset() {
     phone.classList.remove('is-done');
+    phone.classList.remove('is-swapped');
     if (zap) zap.hidden = true;
     hint.textContent = origHint;
     playing = false;
@@ -295,12 +305,23 @@
   phone.addEventListener('click', function () {
     if (playing) return;
     clearTimeout(resetTimer);
+    clearTimeout(swapTimer);
     clearTimeout(loopTimer);
+    phone.classList.remove('is-swapped');
     if (reduced) { instantDone(); return; }
-    playAuto();
+    loopTimer = setTimeout(playAuto, 300);
   });
   phone.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!playing) playAuto(); }
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (playing) return;
+      clearTimeout(resetTimer);
+      clearTimeout(swapTimer);
+      clearTimeout(loopTimer);
+      phone.classList.remove('is-swapped');
+      if (reduced) { instantDone(); return; }
+      loopTimer = setTimeout(playAuto, 300);
+    }
   });
 
   // автодемо, когда блок попадает в зону видимости; ушёл из вида — цикл останавливается

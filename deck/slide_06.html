@@ -20,6 +20,27 @@
   .x-wrap{position:relative;height:min(490px,56vh);aspect-ratio:780/1688;margin:0 auto;display:block}
   .x-wrap img{width:100%;height:100%;object-fit:cover;display:block;border-radius:30px;border:1px solid rgba(108,71,255,0.4);box-shadow:0 34px 80px rgba(0,0,0,0.6),0 0 90px rgba(108,71,255,0.16)}
   .x-wrap canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+
+  /* реплики задач в фокусе: после жеста Х задача уходит, следующая выезжает на главный */
+  .x-tasks{position:absolute;inset:0;z-index:4;pointer-events:none}
+  .x-task{position:absolute;left:3.4%;right:3.4%;top:10.4%;height:15.4%;display:flex;align-items:center;gap:2.1em;padding:0 2.6em 0 3.2em;background:linear-gradient(135deg,#443291 0%,#2A1F6E 48%,#13133C 100%);border:0.16em solid rgba(129,110,225,0.55);border-radius:2.6em;box-shadow:0 0.8em 2.4em rgba(0,0,0,0.35);transition:transform .38s cubic-bezier(.3,.9,.3,1),opacity .3s ease;will-change:transform,opacity}
+  .x-ico{flex:none;width:8.8em;height:8.8em;border-radius:2.5em;background:linear-gradient(160deg,#8F6BFF 0%,#5B3FD6 100%);display:flex;align-items:center;justify-content:center;font-size:1em}
+  .x-ico::before{font-size:4.6em;line-height:1}
+  .xt-cur .x-ico::before{content:'🎯'}
+  .xt-nxt .x-ico::before{content:'🏃'}
+  .x-body{flex:1;min-width:0}
+  .x-eyebrow{font-family:var(--font-heading);font-size:1.85em;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#B3A6F8;white-space:nowrap}
+  .x-queue{color:#5BD9FF}
+  .x-text{font-family:var(--font-heading);font-size:3.3em;font-weight:700;line-height:1.22;color:#F5F3FF;margin-top:0.32em}
+  .x-meta{font-size:2.05em;color:#9D97C4;margin-top:0.5em}
+  .x-acts{display:flex;gap:1.5em;margin-top:1.3em}
+  .x-btn{font-family:var(--font-heading);font-size:1.95em;font-weight:600;line-height:1;padding:0.9em 2em;border-radius:99em;white-space:nowrap}
+  .x-btn-main{background:rgba(124,94,255,0.30);border:0.12em solid rgba(150,120,255,0.55);color:#EFEBFF}
+  .x-btn-alt{background:rgba(96,96,150,0.30);border:0.12em solid rgba(170,170,215,0.35);color:#E9E7F5}
+  .xt-nxt{transform:translateY(56%) scale(0.97);opacity:0}
+  .x-wrap.is-swapped .xt-cur{transform:translateY(-135%) scale(0.96);opacity:0}
+  .x-wrap.is-swapped .xt-nxt{transform:translateY(0) scale(1);opacity:1;transition-delay:0.13s}
+
   .x-zap{position:absolute;top:6.5%;right:13%;font-size:calc(var(--fs-h1)*0.62);z-index:6;pointer-events:none;animation:zapPop .55s cubic-bezier(.2,1.4,.4,1) both}
   @keyframes zapPop{0%{transform:scale(0) rotate(-25deg);opacity:0}60%{transform:scale(1.35) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
   .x-celebrate{position:absolute;inset:0;z-index:7;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden}
@@ -59,11 +80,31 @@
     <!-- RIGHT: screenshot with live X gesture demo -->
     <div class="flex flex-col flex-1" style="justify-content:center">
       <div class="x-wrap" id="xPhone">
-        <img src="../assets/shot_main.webp" alt="Главный экран: жест Х зачёркивает задачу в фокусе">
+        <img src="../assets/shot_main_clear.webp" alt="Главный экран Хэзэнштейна: жест Х закрывает задачу, следующая выезжает в фокус">
+        <div class="x-tasks" id="xTasks" aria-hidden="true">
+          <div class="x-task xt-cur">
+            <span class="x-ico"></span>
+            <div class="x-body">
+              <div class="x-eyebrow">Сейчас в фокусе <span class="x-queue">· ещё 1</span></div>
+              <div class="x-text">Купить беговые кроссовки и&nbsp;экипирование</div>
+              <div class="x-meta">🏷 полумарафон</div>
+              <div class="x-acts"><span class="x-btn x-btn-main">Готово</span><span class="x-btn x-btn-alt">↪ Пропустить</span></div>
+            </div>
+          </div>
+          <div class="x-task xt-nxt">
+            <span class="x-ico"></span>
+            <div class="x-body">
+              <div class="x-eyebrow">Сейчас в фокусе</div>
+              <div class="x-text">Составить план тренировок на&nbsp;неделю</div>
+              <div class="x-meta">🏷 полумарафон · 📅 завтра</div>
+              <div class="x-acts"><span class="x-btn x-btn-main">Готово</span><span class="x-btn x-btn-alt">↪ Пропустить</span></div>
+            </div>
+          </div>
+        </div>
         <canvas id="xCanvas" aria-hidden="true"></canvas>
         <span class="x-zap" id="xZap" hidden>⚡</span>
       </div>
-      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.6;">Демо: жест Х зачёркивает задачу — как в приложении</p>
+      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.6;">Демо: жест Х — задача уходит, следующая сама выезжает в фокус</p>
     </div>
 
   </div>
@@ -77,10 +118,11 @@
   var wrap = document.getElementById('xPhone');
   var canvas = document.getElementById('xCanvas');
   var zap = document.getElementById('xZap');
+  var tasks = document.getElementById('xTasks');
   if (!wrap || !canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
 
-  var strokes = [], current = null, fadeRunning = false, resetTimer = null, loopTimer = null;
+  var strokes = [], current = null, fadeRunning = false, resetTimer = null, swapTimer = null, loopTimer = null;
   var visible = false;
 
   function sizeCanvas() {
@@ -90,6 +132,8 @@
     var w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     ctx.setTransform(w / r.width, 0, 0, h / r.height, 0, 0);
+    // реплики задач: 1em = 10px исходного скриншота
+    if (tasks) { var wr = wrap.getBoundingClientRect(); if (wr.width) tasks.style.fontSize = (wr.width / 78) + 'px'; }
   }
 
   function drawPath(pts, alpha, color, width) {
@@ -183,13 +227,16 @@
         wrap.classList.add('is-done');
         if (zap) zap.hidden = false;
         celebrate();
-        resetTimer = setTimeout(reset, 2600);
+        /* как в приложении: задача уходит — следующая выезжает на главный */
+        swapTimer = setTimeout(function () { wrap.classList.add('is-swapped'); }, 950);
+        resetTimer = setTimeout(reset, 2900);
       });
     });
   }
 
   function reset() {
     wrap.classList.remove('is-done');
+    wrap.classList.remove('is-swapped');
     if (zap) zap.hidden = true;
     if (visible) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1100); }
   }
@@ -209,12 +256,15 @@
   /* страховка: если анимация где-то прервалась (ресайз и т.п.) — перезапускаем цикл */
   setInterval(function () {
     if (visible && !current && !wrap.classList.contains('is-done')) {
+      clearTimeout(resetTimer);
+      clearTimeout(swapTimer);
       clearTimeout(loopTimer);
+      wrap.classList.remove('is-swapped');
       loopTimer = setTimeout(playAuto, 500);
     }
   }, 5000);
 
-  window.addEventListener('resize', function () { clearTimeout(resetTimer); clearTimeout(loopTimer); sizeCanvas(); if (visible) { loopTimer = setTimeout(playAuto, 800); } });
+  window.addEventListener('resize', function () { clearTimeout(resetTimer); clearTimeout(swapTimer); clearTimeout(loopTimer); wrap.classList.remove('is-swapped'); sizeCanvas(); if (visible) { loopTimer = setTimeout(playAuto, 800); } });
   sizeCanvas();
 })();
 </script>
