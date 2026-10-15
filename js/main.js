@@ -120,7 +120,8 @@
   }
 })();
 
-/* ---- Демо «Кайф зачёркивания»: просто демо — жест Х проигрывается сам по кругу, скролл страницы не блокируется ---- */
+/* ---- Демо «Кайф зачёркивания»: жест Х закрывает задачи одну за другой, пока очередь не опустеет;
+        скролл страницы не блокируется ---- */
 (function () {
   var phone = document.getElementById('crossPhone');
   if (!phone) return;
@@ -138,11 +139,21 @@
   var resetTimer = null;
   var swapTimer = null;
   var loopTimer = null;
+  var enterTimer = null;   // задержка въезда следующей карточки (130мс, как transition-delay в CSS)
   var playing = false;
   var visible = false;
   var reduced = false;
   var playedOnce = false;
   var origHint = hint.textContent;
+  var cards = tasks ? Array.prototype.slice.call(tasks.querySelectorAll('.cross-task')) : [];
+  var curIdx = 0;          // какая карточка сейчас в фокусе
+
+  /* ритм демо: Х закрывает задачи одну за другой, пока очередь не опустеет — так отчётливо видно, что список меняется */
+  var T_READ = 2800;       // карточка в фокусе до начала штрихов — основная «пауза между повторами»
+  var T_CELEBRATE = 950;   // празднование до начала смены карточек
+  var T_SWAP = 700;        // смена карточек: задержка въезда 130мс + transition 380мс + запас
+  var T_EMPTY = 2400;      // пустой экран после последней задачи («день закрыт»)
+  var T_NEW_DAY = 3400;    // возврат первой карточки → длинная пауза до нового круга
 
   try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
@@ -240,24 +251,38 @@
     phone.classList.add('is-done');
     if (zap) zap.hidden = false;
     celebrate();
+    var leaving = cards[curIdx];
+    var wasLast = curIdx >= cards.length - 1;
     hint.textContent = '⚡ Есть! Задача закрыта — смотрим дальше';
     // как в приложении: после празднования задача уходит, следующая выезжает на главный
     swapTimer = setTimeout(function () {
-      phone.classList.add('is-swapped');
-      hint.textContent = '⚡ Новая задача выехала на главный — тапни, чтобы повторить';
-    }, 950);
-    // держим новую задачу на экране ~4с (после выезда), чтобы было явно видно, что задача сменилась
-    resetTimer = setTimeout(reset, 5600);
-  }
-
-  function reset() {
-    phone.classList.remove('is-done');
-    phone.classList.remove('is-swapped');
-    if (zap) zap.hidden = true;
-    hint.textContent = origHint;
-    playing = false;
-    // пауза после сброса: успеваем увидеть «начальное» состояние перед новым кругом
-    if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, 1400); }
+      phone.classList.remove('is-done');
+      if (zap) zap.hidden = true; // ⚡ не должен висеть над новой задачей
+      leaving.classList.remove('ct-current');
+      leaving.classList.add('ct-leave');
+      // улетающая возвращается в ожидание снизу, когда её уже не видно
+      setTimeout(function () { leaving.classList.remove('ct-leave'); }, 620);
+      if (!wasLast) {
+        curIdx += 1;
+        enterTimer = setTimeout(function () { cards[curIdx].classList.add('ct-current'); }, 130);
+        hint.textContent = '⚡ Новая задача выехала на главный — очередь тает';
+      } else {
+        hint.textContent = '✓ Очередь пуста — так выглядит закрытый день';
+      }
+      playing = false;
+    }, T_CELEBRATE);
+    if (wasLast) {
+      // «новый день»: первая карточка выезжает обратно, затем длинная пауза до нового круга
+      resetTimer = setTimeout(function () {
+        curIdx = 0;
+        cards[0].classList.add('ct-current');
+        hint.textContent = origHint;
+        if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, T_NEW_DAY); }
+      }, T_CELEBRATE + T_SWAP + T_EMPTY);
+    } else {
+      // следующая карточка остаётся в фокусе T_READ — отчётливо видно, что задача сменилась
+      if (visible && !reduced) { clearTimeout(loopTimer); loopTimer = setTimeout(playAuto, T_CELEBRATE + T_SWAP + T_READ); }
+    }
   }
 
   function animateStroke(a, b, done) {
@@ -277,9 +302,15 @@
     requestAnimationFrame(step);
   }
 
-  // автопоказ: два штриха Х по экрану (как в приложении), затем зелёная вспышка + празднование
+  // автопоказ: два штриха Х по экрану (как в приложении), затем зелёная вспышка + празднование.
+  // Если поймали смену карточек — просто повторяем попытку чуть позже (само-восстановление цикла)
   function playAuto() {
-    if (playing || !visible) return;
+    if (!visible) return;
+    if (playing || !cards[curIdx] || !cards[curIdx].classList.contains('ct-current')) {
+      clearTimeout(loopTimer);
+      loopTimer = setTimeout(playAuto, 600);
+      return;
+    }
     playing = true;
     var r = canvas.getBoundingClientRect();
     var w = r.width, h = r.height;
@@ -303,26 +334,30 @@
     hint.textContent = '✓ Задача выполнена — так это работает в приложении';
   }
 
-  // тап = повтор (скролл никогда не блокируем: ни preventDefault, ни touch-action:none)
-  phone.addEventListener('click', function () {
+  // тап = повтор на текущей карточке (скролл никогда не блокируем: ни preventDefault, ни touch-action:none)
+  function tapRepeat() {
     if (playing) return;
     clearTimeout(resetTimer);
     clearTimeout(swapTimer);
+    clearTimeout(enterTimer);
     clearTimeout(loopTimer);
-    phone.classList.remove('is-swapped');
+    // поймали промежуточное состояние (пустой экран и т.п.) — начинаем показ сначала
+    if (!cards[curIdx] || !cards[curIdx].classList.contains('ct-current')) {
+      cards.forEach(function (c) { c.classList.remove('ct-current'); c.classList.remove('ct-leave'); });
+      curIdx = 0;
+      cards[0].classList.add('ct-current');
+      hint.textContent = origHint;
+    }
+    phone.classList.remove('is-done');
+    if (zap) zap.hidden = true;
     if (reduced) { instantDone(); return; }
-    loopTimer = setTimeout(playAuto, 300);
-  });
+    loopTimer = setTimeout(playAuto, 350);
+  }
+  phone.addEventListener('click', tapRepeat);
   phone.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      if (playing) return;
-      clearTimeout(resetTimer);
-      clearTimeout(swapTimer);
-      clearTimeout(loopTimer);
-      phone.classList.remove('is-swapped');
-      if (reduced) { instantDone(); return; }
-      loopTimer = setTimeout(playAuto, 300);
+      tapRepeat();
     }
   });
 

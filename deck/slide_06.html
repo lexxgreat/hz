@@ -26,8 +26,10 @@
   .x-task{position:absolute;left:3.4%;right:3.4%;top:10.4%;height:15.4%;display:flex;align-items:center;gap:2.1em;padding:0 2.6em 0 3.2em;background:linear-gradient(135deg,#443291 0%,#2A1F6E 48%,#13133C 100%);border:0.16em solid rgba(129,110,225,0.55);border-radius:2.6em;box-shadow:0 0.8em 2.4em rgba(0,0,0,0.35);transition:transform .38s cubic-bezier(.3,.9,.3,1),opacity .3s ease;will-change:transform,opacity}
   .x-ico{flex:none;width:8.8em;height:8.8em;border-radius:2.5em;background:linear-gradient(160deg,#8F6BFF 0%,#5B3FD6 100%);display:flex;align-items:center;justify-content:center;font-size:1em}
   .x-ico::before{font-size:4.6em;line-height:1}
-  .xt-cur .x-ico::before{content:'🎯'}
-  .xt-nxt .x-ico::before{content:'🏃'}
+  /* иконка принадлежит карточке, а не позиции в очереди */
+  .x-ic-a::before{content:'🎯'}
+  .x-ic-b::before{content:'🏃'}
+  .x-ic-c::before{content:'🌅'}
   .x-body{flex:1;min-width:0}
   .x-eyebrow{font-family:var(--font-heading);font-size:1.85em;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#B3A6F8;white-space:nowrap}
   .x-queue{color:#5BD9FF}
@@ -37,9 +39,10 @@
   .x-btn{font-family:var(--font-heading);font-size:1.95em;font-weight:600;line-height:1;padding:0.9em 2em;border-radius:99em;white-space:nowrap}
   .x-btn-main{background:rgba(124,94,255,0.30);border:0.12em solid rgba(150,120,255,0.55);color:#EFEBFF}
   .x-btn-alt{background:rgba(96,96,150,0.30);border:0.12em solid rgba(170,170,215,0.35);color:#E9E7F5}
-  .xt-nxt{transform:translateY(56%) scale(0.97);opacity:0}
-  .x-wrap.is-swapped .xt-cur{transform:translateY(-135%) scale(0.96);opacity:0}
-  .x-wrap.is-swapped .xt-nxt{transform:translateY(0) scale(1);opacity:1;transition-delay:0.13s}
+  /* очередь задач: по умолчанию карточка ждёт снизу; .xt-cur — в фокусе, .xt-leave — улетает вверх */
+  .x-task{transform:translateY(56%) scale(0.97);opacity:0;transition-delay:0s}
+  .x-task.xt-cur{transform:translateY(0) scale(1);opacity:1;transition-delay:0.13s}
+  .x-task.xt-leave{transform:translateY(-135%) scale(0.96);opacity:0;transition-delay:0s}
 
   .x-zap{position:absolute;top:6.5%;right:13%;font-size:calc(var(--fs-h1)*0.62);z-index:6;pointer-events:none;animation:zapPop .55s cubic-bezier(.2,1.4,.4,1) both}
   @keyframes zapPop{0%{transform:scale(0) rotate(-25deg);opacity:0}60%{transform:scale(1.35) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
@@ -83,20 +86,29 @@
         <img src="../assets/shot_main_clear.webp" alt="Главный экран Хэзэнштейна: жест Х закрывает задачу, следующая выезжает в фокус">
         <div class="x-tasks" id="xTasks" aria-hidden="true">
           <div class="x-task xt-cur">
-            <span class="x-ico"></span>
+            <span class="x-ico x-ic-a"></span>
             <div class="x-body">
-              <div class="x-eyebrow">Сейчас в фокусе <span class="x-queue">· ещё 1</span></div>
+              <div class="x-eyebrow">Сейчас в фокусе <span class="x-queue">· ещё 2</span></div>
               <div class="x-text">Купить беговые кроссовки и&nbsp;экипирование</div>
               <div class="x-meta">🏷 полумарафон</div>
               <div class="x-acts"><span class="x-btn x-btn-main">Готово</span><span class="x-btn x-btn-alt">↪ Пропустить</span></div>
             </div>
           </div>
-          <div class="x-task xt-nxt">
-            <span class="x-ico"></span>
+          <div class="x-task">
+            <span class="x-ico x-ic-b"></span>
             <div class="x-body">
-              <div class="x-eyebrow">Сейчас в фокусе</div>
+              <div class="x-eyebrow">Сейчас в фокусе <span class="x-queue">· ещё 1</span></div>
               <div class="x-text">Составить план тренировок на&nbsp;неделю</div>
               <div class="x-meta">🏷 полумарафон · 📅 завтра</div>
+              <div class="x-acts"><span class="x-btn x-btn-main">Готово</span><span class="x-btn x-btn-alt">↪ Пропустить</span></div>
+            </div>
+          </div>
+          <div class="x-task">
+            <span class="x-ico x-ic-c"></span>
+            <div class="x-body">
+              <div class="x-eyebrow">Сейчас в фокусе</div>
+              <div class="x-text">Пробежка 5&nbsp;км в&nbsp;парке</div>
+              <div class="x-meta">🏷 полумарафон · 📅 суббота</div>
               <div class="x-acts"><span class="x-btn x-btn-main">Готово</span><span class="x-btn x-btn-alt">↪ Пропустить</span></div>
             </div>
           </div>
@@ -104,7 +116,7 @@
         <canvas id="xCanvas" aria-hidden="true"></canvas>
         <span class="x-zap" id="xZap" hidden>⚡</span>
       </div>
-      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.6;">Демо: жест Х — задача уходит, следующая сама выезжает в фокус</p>
+      <p class="shot-caption" style="color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.6;">Демо: жест Х закрывает задачи одну за другой — очередь тает на глазах</p>
     </div>
 
   </div>
@@ -122,14 +134,23 @@
   if (!wrap || !canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
 
-  var strokes = [], current = null, fadeRunning = false, resetTimer = null, swapTimer = null, loopTimer = null, queued = false;
+  var strokes = [], current = null, fadeRunning = false, resetTimer = null, swapTimer = null, loopTimer = null, enterTimer = null, queued = false;
   var visible = false;
+  var cards = tasks ? Array.prototype.slice.call(tasks.querySelectorAll('.x-task')) : [];
+  var curIdx = 0; /* какая карточка сейчас в фокусе */
 
-  /* единая точка планирования повтора: queued сообщает страховке, что цикл уже запланирован */
-  function scheduleReplay(ms) {
+  /* ритм демо — как на мобильной версии: Х закрывает задачи одну за другой, пока очередь не опустеет */
+  var T_READ = 2800;       /* карточка в фокусе до начала штрихов — основная пауза */
+  var T_CELEBRATE = 950;   /* празднование до начала смены карточек */
+  var T_SWAP = 700;        /* смена карточек: задержка въезда 130мс + transition 380мс + запас */
+  var T_EMPTY = 2400;      /* пустой экран после последней задачи */
+  var T_NEW_DAY = 3400;    /* возврат первой карточки → пауза до нового круга */
+
+  /* единая точка планирования: queued сообщает страховке, что цикл уже запланирован */
+  function scheduleReplay(ms, fn) {
     queued = true;
     clearTimeout(loopTimer);
-    loopTimer = setTimeout(function () { queued = false; playAuto(); }, ms);
+    loopTimer = setTimeout(function () { queued = false; (fn || playAuto)(); }, ms);
   }
 
   function sizeCanvas() {
@@ -224,29 +245,51 @@
   }
 
   function playAuto() {
-    if (!visible || current) return;
+    if (!visible) return;
+    if (current || !cards[curIdx] || !cards[curIdx].classList.contains('xt-cur')) {
+      /* заняты сменой карточек — повторяем попытку чуть позже (само-восстановление цикла) */
+      scheduleReplay(600);
+      return;
+    }
     var r = canvas.getBoundingClientRect();
     if (!r.width) return;
     var w = r.width, h = r.height;
     animateStroke({ x: w * 0.16, y: h * 0.095 }, { x: w * 0.84, y: h * 0.245 }, function () {
       animateStroke({ x: w * 0.84, y: h * 0.095 }, { x: w * 0.16, y: h * 0.245 }, function () {
         strokes.forEach(function (s) { s.matched = true; s.time = Date.now(); });
-        wrap.classList.add('is-done');
-        if (zap) zap.hidden = false;
-        celebrate();
-        /* как в приложении: задача уходит — следующая выезжает на главный */
-        swapTimer = setTimeout(function () { wrap.classList.add('is-swapped'); }, 950);
-        /* держим новую задачу ~4с после выезда — видно, что задача сменилась */
-        resetTimer = setTimeout(reset, 5600);
+        success();
       });
     });
   }
 
-  function reset() {
-    wrap.classList.remove('is-done');
-    wrap.classList.remove('is-swapped');
-    if (zap) zap.hidden = true;
-    if (visible) { scheduleReplay(1400); }
+  /* как в приложении: празднование → задача уходит → следующая выезжает на главный;
+     после последней — пустой экран («день закрыт») и первый круг заново */
+  function success() {
+    wrap.classList.add('is-done');
+    if (zap) zap.hidden = false;
+    celebrate();
+    var leaving = cards[curIdx];
+    var wasLast = curIdx >= cards.length - 1;
+    swapTimer = setTimeout(function () {
+      wrap.classList.remove('is-done');
+      if (zap) zap.hidden = true;
+      leaving.classList.remove('xt-cur');
+      leaving.classList.add('xt-leave');
+      setTimeout(function () { leaving.classList.remove('xt-leave'); }, 620);
+      if (!wasLast) {
+        curIdx += 1;
+        enterTimer = setTimeout(function () { cards[curIdx].classList.add('xt-cur'); }, 130);
+      }
+    }, T_CELEBRATE);
+    if (wasLast) {
+      scheduleReplay(T_CELEBRATE + T_SWAP + T_EMPTY, function () {
+        curIdx = 0;
+        cards[0].classList.add('xt-cur');
+        scheduleReplay(T_NEW_DAY);
+      });
+    } else {
+      scheduleReplay(T_CELEBRATE + T_SWAP + T_READ);
+    }
   }
 
   /* играть только когда слайд в кадре */
@@ -273,7 +316,7 @@
     }
   }, 5000);
 
-  window.addEventListener('resize', function () { clearTimeout(resetTimer); clearTimeout(swapTimer); queued = false; clearTimeout(loopTimer); wrap.classList.remove('is-swapped'); sizeCanvas(); if (visible) { scheduleReplay(800); } });
+  window.addEventListener('resize', sizeCanvas);
   sizeCanvas();
 })();
 </script>
